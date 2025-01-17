@@ -1,0 +1,182 @@
+
+
+Mon Oct 21 01:14:01 2024
+Command line: TestDisk
+
+TestDisk 7.1, Data Recovery Utility, July 2019
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Linux, kernel 4.18.0-553.16.1.el8_10.x86_64 (#1 SMP Thu Aug 1 04:16:12 EDT 2024) x86_64
+Compiler: GCC 8.4
+ext2fs lib: 1.45.6, ntfs lib: libntfs-3g, reiserfs lib: none, ewf lib: 20140608, curses lib: ncurses 6.1
+/dev/sda: LBA, HPA, LBA48, DCO support
+/dev/sda: size       1953525168 sectors
+/dev/sda: user_max   1953525168 sectors
+/dev/sda: native_max 1953525168 sectors
+Warning: can't get size for Disk /dev/mapper/control - 0 B - 0 sectors, sector size=512
+Hard disk list
+Disk /dev/sda - 1000 GB / 931 GiB - CHS 121601 255 63, sector size=512 - ST1000LM048-2E7172, S/N:WKPGZ112, FW:0001
+Disk /dev/mapper/rhel-home - 1427 GB / 1329 GiB - 2787246080 sectors, sector size=512
+Disk /dev/mapper/rhel-root - 75 GB / 70 GiB - 146800640 sectors, sector size=512
+Disk /dev/mapper/rhel-swap - 8371 MB / 7984 MiB - 16351232 sectors, sector size=512
+Disk /dev/dm-0 - 75 GB / 70 GiB - 146800640 sectors, sector size=512
+Disk /dev/dm-1 - 8371 MB / 7984 MiB - 16351232 sectors, sector size=512
+Disk /dev/dm-2 - 1427 GB / 1329 GiB - 2787246080 sectors, sector size=512
+Disk /dev/nvme0n1 - 512 GB / 476 GiB - CHS 488386 64 32, sector size=512
+
+Partition table type (auto): EFI GPT
+Disk /dev/sda - 1000 GB / 931 GiB - ST1000LM048-2E7172
+Partition table type: Intel
+
+Analyse Disk /dev/sda - 1000 GB / 931 GiB - CHS 121601 255 63
+Geometry from i386 MBR: head=255 sector=63
+check_part_i386 1 type EE: no test
+Current partition structure:
+ 1 P EFI GPT                  0   0  2 121601  80 63 1953525167
+No partition is bootable
+
+search_part()
+Disk /dev/sda - 1000 GB / 931 GiB - CHS 121601 255 63
+FAT32 at 0/32/33
+FAT1 : 32-1231
+FAT2 : 1232-2431
+start_rootdir : 2432 root cluster : 2
+Data : 2432-1228799
+sectors : 1228800
+cluster_size : 8
+no_of_cluster : 153296 (2 - 153297)
+fat_length 1200 calculated 1198
+set_FAT_info: name from BS used
+
+FAT32 at 0/32/33
+FAT: cluster=2(0x2), pos=4480
+     FAT32                    0  32 33    76 157 17    1228800 [EFI System Partition] [NO NAME]
+     FAT32, blocksize=4096, 629 MB / 600 MiB
+
+XFS Marker at 76/157/18
+
+recover_xfs
+     Linux                   76 157 18   207  40 25    2097152
+     XFS CRC enabled, blocksize=4096, 1073 MB / 1024 MiB
+
+LVM2 magic value at 207/40/26
+part_size 1950195712
+     Linux LVM              207  40 26 121601  57 56 1950195712
+     LVM2, 998 GB / 929 GiB
+
+Results
+   * FAT32                    0  32 33    76 157 17    1228800 [EFI System Partition] [NO NAME]
+     FAT32, blocksize=4096, 629 MB / 600 MiB
+   P Linux                   76 157 18   207  40 25    2097152
+     XFS CRC enabled, blocksize=4096, 1073 MB / 1024 MiB
+   P Linux LVM              207  40 26 121601  57 56 1950195712
+     LVM2, 998 GB / 929 GiB
+
+Hint for advanced users: dmsetup may be used if you prefer to avoid rewriting the partition table for the moment:
+echo "0 1228800 linear /dev/sda 2048" | dmsetup create test0
+echo "0 2097152 linear /dev/sda 1230848" | dmsetup create test1
+echo "0 1950195712 linear /dev/sda 3328000" | dmsetup create test2
+
+interface_write()
+ 1 * FAT32                    0  32 33    76 157 17    1228800 [EFI System Partition] [NO NAME]
+ 2 P Linux                   76 157 18   207  40 25    2097152
+ 3 P Linux LVM              207  40 26 121601  57 56 1950195712
+
+search_part()
+Disk /dev/sda - 1000 GB / 931 GiB - CHS 121601 255 63
+FAT32 at 0/32/33
+FAT1 : 32-1231
+FAT2 : 1232-2431
+start_rootdir : 2432 root cluster : 2
+Data : 2432-1228799
+sectors : 1228800
+cluster_size : 8
+no_of_cluster : 153296 (2 - 153297)
+fat_length 1200 calculated 1198
+set_FAT_info: name from BS used
+
+FAT32 at 0/32/33
+FAT: cluster=2(0x2), pos=4480
+     FAT32                    0  32 33    76 157 17    1228800 [EFI System Partition] [NO NAME]
+     FAT32, blocksize=4096, 629 MB / 600 MiB
+FAT32 at 0/32/39
+FAT1 : 32-1231
+FAT2 : 1232-2431
+start_rootdir : 2432 root cluster : 2
+Data : 2432-1228799
+sectors : 1228800
+cluster_size : 8
+no_of_cluster : 153296 (2 - 153297)
+fat_length 1200 calculated 1198
+set_FAT_info: name from BS used
+
+FAT32 at 0/32/39
+FAT: cluster=2(0x2), pos=4480
+     FAT32                    0  32 33    76 157 17    1228800 [EFI System Partition] [NO NAME]
+     FAT32, blocksize=4096, 629 MB / 600 MiB
+
+XFS Marker at 76/157/18
+
+recover_xfs
+     Linux                   76 157 18   207  40 25    2097152
+     XFS CRC enabled, blocksize=4096, 1073 MB / 1024 MiB
+
+XFS Marker at 109/64/20
+
+recover_xfs
+     Linux                  109  64 20   239 202 27    2097152
+     XFS CRC enabled, blocksize=4096, 1073 MB / 1024 MiB
+
+XFS Marker at 141/226/22
+
+recover_xfs
+     Linux                  141 226 22   272 109 29    2097152
+     XFS CRC enabled, blocksize=4096, 1073 MB / 1024 MiB
+
+XFS Marker at 174/133/24
+
+recover_xfs
+     Linux                  174 133 24   305  16 31    2097152
+     XFS CRC enabled, blocksize=4096, 1073 MB / 1024 MiB
+
+LVM2 magic value at 207/40/26
+part_size 1950195712
+     Linux LVM              207  40 26 121601  57 56 1950195712
+     LVM2, 998 GB / 929 GiB
+
+XFS Marker at 207/72/58
+
+recover_xfs
+     Linux                  207  72 58 173705  84 11 2787246080
+     XFS CRC enabled, blocksize=4096, 1427 GB / 1329 GiB
+This partition ends after the disk limits. (start=3330048, size=2787246080, end=2790576127, disk end=1953525168)
+NTFS at 121601/57/56
+filesystem size           45887488
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     HPFS - NTFS          118744 220  5 121601  57 56   45887488
+     NTFS found using backup sector, blocksize=4096, 23 GB / 21 GiB
+NTFS at 121601/57/56
+filesystem size           45887488
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+NTFS: Can't read MFT
+     HPFS - NTFS          121601  57 56 124457 150 44   45887488
+     NTFS, blocksize=4096, 23 GB / 21 GiB
+This partition ends after the disk limits. (start=1953523711, size=45887488, end=1999411198, disk end=1953525168)
+Search for partition aborted
+Disk /dev/sda - 1000 GB / 931 GiB - CHS 121601 255 63
+Check the harddisk size: HD jumper settings, BIOS detection...
+The harddisk (1000 GB / 931 GiB) seems too small! (< 1428 GB / 1330 GiB)
+The following partitions can't be recovered:
+     Linux                  207  72 58 173705  84 11 2787246080
+     XFS CRC enabled, blocksize=4096, 1427 GB / 1329 GiB
+     HPFS - NTFS          121601  57 56 124457 150 44   45887488
+     NTFS, blocksize=4096, 23 GB / 21 GiB
+SIGINT detected! TestDisk has been killed.

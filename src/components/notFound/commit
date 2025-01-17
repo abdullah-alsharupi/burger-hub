@@ -1,0 +1,23 @@
+import Icon from 'react-native-vector-icons/FontAwesome'; 
+/*<NotFound
+        icon="heart-o" 
+        message1="No favorites"
+        message2="Choose your favorite items by hitting the heart"
+        buttonTitle="Start browsing"
+        onButtonPress={handlePress} 
+        />
+        favorites للاستخدام 
+        
+
+
+
+          icon="search" // استخدم أيقونة البحث
+        message1="Item not found"
+        message2='Try searching the item with a different keyword'
+
+          icon="wifi"
+        message1="no internet connection."
+         message2="your internet connection is currently not availble try again"
+        buttonTitle="Try agine" 
+        onButtonPress={handlePress} 
+        */
