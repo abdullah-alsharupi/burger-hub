@@ -32,6 +32,7 @@ const UserPaymentScreen = () => {
   if (paymentError) {
     return <ErrorText message={paymentError.message} />;
   }
+  // console.log(paymentMethods)
 
   return (
     <View style={styles.container}>
@@ -41,7 +42,9 @@ const UserPaymentScreen = () => {
             refetch={refetch}
             paymentMethods={paymentMethods}
           />
-        ) : null)}
+        ) : <View style={{flex:1,justifyContent:"center" ,alignItems:"center",backgroundColor:"red"}}>
+          null
+        </View>)}
       <View style={{position:"absolute", alignSelf:"center",bottom:0}}>
       <Button
         size="large"

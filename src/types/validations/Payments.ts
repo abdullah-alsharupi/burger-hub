@@ -1,3 +1,4 @@
+import { JSX } from "react";
 import { PaymentMethod } from "../schema/enums";
 
  
@@ -6,7 +7,7 @@ export interface PaymentMethodPayPal {
     created_at: string;  
     deletedAt: string | null;
     email: string;
-    id: number;
+    id: string;
     is_deleted: boolean | null;
     method_type: PaymentMethod;
     phone_number: string;
@@ -14,7 +15,8 @@ export interface PaymentMethodPayPal {
     user_id: string;
 }
 
-export interface PaymentMethodVisa {
+export interface PaymentMethodsResponse {
+    map(arg0: (payment: any) => JSX.Element): import("react").ReactNode;
     card_cvc: number;
     card_number: string;
     phone_number: string;
@@ -23,13 +25,13 @@ export interface PaymentMethodVisa {
     created_at: string;  
     deletedAt: string | null;
     expire_date: string;  
-    id: number;
+    id: string;
     is_deleted: boolean | null;
     method_type: PaymentMethod;
     updatedAt: string | null;
     user_id: string;
 }
 
- export interface PaymentMethodsResponse {
-    payment_method_visa_super_visa: PaymentMethodVisa[] | null;  
-}
+//  export interface PaymentMethodsResponse {
+//     payment_method_visa_super_visa: PaymentMethodVisa[];  
+// }

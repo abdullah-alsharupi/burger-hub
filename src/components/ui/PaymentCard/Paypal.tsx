@@ -15,11 +15,11 @@ const { width } = Dimensions.get("window");
 type Props = {
   paymentMethode: PaymentMethodPayPal;
   onClick: () => void;
-  selectedPaymentID?: number;
+  selectedPaymentID?: string;
   selectedPaymentType?: PaymentMethod
 };
 
-function Paypal({ paymentMethode, onClick, selectedPaymentID=0, selectedPaymentType }: Props) {
+function Paypal({ paymentMethode, onClick, selectedPaymentID="", selectedPaymentType }: Props) {
  
   return (
     < >

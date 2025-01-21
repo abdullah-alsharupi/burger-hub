@@ -22,7 +22,7 @@ const Buttons = ({data}:props) => {
   };
   const handleAddProduct =async () => {
     console.log("im button and cart store before",cart)
-    const x = addProduct({
+    addProduct({
       id: data?.product?.id,
       imageurl: data?.product?.imageurl,
       name: data?.product?.name,
@@ -31,7 +31,7 @@ const Buttons = ({data}:props) => {
       options: [],
       note:null
     });
-   await getTotalProducts();
+    getTotalProducts();
     showToast("Product has been added successfully!", { type: "success" });
     router.back();
   };

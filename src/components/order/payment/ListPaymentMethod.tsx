@@ -1,7 +1,7 @@
 import React from "react";
 import {
   PaymentMethodsResponse,
-  PaymentMethodVisa,
+
 } from "@/src/types/validations/Payments";
  import { useCartStore } from "@/src/store/cart/cartStore";
  import Visa from "../../ui/PaymentCard/Visa";
@@ -9,6 +9,7 @@ import {
 import { PaymentMethod } from "@/src/types/schema/enums";
 import Cash from "../../ui/PaymentCard/Cash";
 import { Dimensions } from "react-native";
+import { PaymentType } from "@/src/store/cart/cartSlice";
 const { height } = Dimensions.get("screen");
 
 type Prop = {
@@ -18,12 +19,12 @@ type Prop = {
 const ListPaymentMethod = ({ dataPayments }: Prop) => {
   const { setPayment, cart } = useCartStore();
 
-  const handlePaymentSelect = (id: number, paymentType: PaymentMethod) => {
+  const handlePaymentSelect = (id: string, paymentType: PaymentType) => {
     setPayment(id, paymentType);
   };
 
-  const renderPaymentMethod = (payment: PaymentMethodVisa) => {
-    const { id, method_type } = payment;
+  const renderPaymentMethod = (payment: PaymentMethodsResponse) => {
+    const { id,method_type} = payment;
 
     switch (method_type) {
       default:
@@ -37,10 +38,10 @@ const ListPaymentMethod = ({ dataPayments }: Prop) => {
 
       <Cash 
        selectedPaymentType={cart?.paymentType}
-       onClick={()=>{handlePaymentSelect( 0 ,'Cash') }}
+       onClick={()=>{handlePaymentSelect(cart.paymentId,cart?.paymentType as any) }}
        
        />
-      {dataPayments.payment_method_visa_super_visa?.map((payment) => (
+      {dataPayments?.map((payment) => (
         <Visa
           key={payment.id}
           onClick={() => handlePaymentSelect(payment.id, payment.method_type)}
@@ -49,7 +50,7 @@ const ListPaymentMethod = ({ dataPayments }: Prop) => {
           selectedPaymentID={cart?.paymentId ?? null}
         />
       ))}
-      {dataPayments.payment_method_visa_super_visa?.map(renderPaymentMethod)}
+      {dataPayments?.map(renderPaymentMethod as any)}
 
       </ScrollView>
     </View>

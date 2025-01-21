@@ -11,7 +11,7 @@ const { width } = Dimensions.get("screen");
 interface PaymentMethodSelectorProps {
   setPaymentMethod: (method: PaymentMethod | null) => void;
 }
-const paymentMethods: PaymentMethod[] = ["Visa", "Super Visa", "PayPal"];
+const paymentMethods: PaymentMethod[] = ["visa", "super visa", "paypal"];
 
 const PaymentMethodSelector: React.FC<PaymentMethodSelectorProps> = ({
   setPaymentMethod,

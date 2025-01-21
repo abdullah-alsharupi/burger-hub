@@ -13,7 +13,6 @@ interface PaymentFormProps {
   handleSubmitPyPal: (data: PaypalType) => void;
   handleSubmitVisaSuperVisa: (data: payment_MethodType) => void;
 }
-
 const PaymentForm: React.FC<PaymentFormProps> = ({
   paymentMethod,
   handleSubmitPyPal,
@@ -27,9 +26,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
           <ActivityIndicator size="large" color="#AF042C" />
         </View>
       )}
-      {paymentMethod === "Visa" || paymentMethod === "Super Visa" ? (
+      {paymentMethod === "visa" || paymentMethod === "super visa" ? (
         <VisaForm onSubmit={handleSubmitVisaSuperVisa} />
-      ) : paymentMethod === "PayPal" ? (
+      ) : paymentMethod === "paypal" ? (
         <PayPalForm onSubmit={handleSubmitPyPal} />
       ) : null}
     </View>

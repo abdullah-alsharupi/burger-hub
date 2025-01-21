@@ -15,7 +15,7 @@ function AddProductFavorite() {
     const showToast = useCustomToast();
 
     const { data: favorite, refetch, isFetched, isFetching, isFetchedAfterMount } = 
-        useGetFavoriteProductsByUserIdWithProductId(Number(id), session?.id || '');
+        useGetFavoriteProductsByUserIdWithProductId(id as string, session?.id || '');
 
     const insertToFavorite = async () => {
         try {

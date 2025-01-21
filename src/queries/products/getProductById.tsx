@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 
 
-export const getProductById = async (id: number) => {
+export const getProductById = async (id: string) => {
   try {
     if (!id) throw new Error("No product found.");
 
@@ -24,7 +24,7 @@ export const getProductById = async (id: number) => {
 
 
 
-export const useGetProductById = (id?: number) => {
+export const useGetProductById = (id?: string) => {
     return useQuery({
       queryKey: ["product", id],
       queryFn: async () => {

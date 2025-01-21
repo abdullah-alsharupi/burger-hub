@@ -15,14 +15,14 @@ const { width } = Dimensions.get("window");
 type Props = {
   paymentMethode: PaymentMethodVisa;
   onClick: () => void;
-  selectedPaymentID?: number;
+  selectedPaymentID?: string;
   selectedPaymentType?:PaymentMethod
 };
 
 function SuperVisa({
   paymentMethode,
   onClick,
-  selectedPaymentID = 0,
+  selectedPaymentID = "",
   selectedPaymentType,
 }: Props) {
   return (

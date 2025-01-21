@@ -43,13 +43,13 @@ export type CartState = {
 
 };export const createCartSlice: StateCreator<CartState> = (set, get) => ({
     cart: {
-        products: [],
+      products:[],
         orderType: OrderType.delivery, 
         paymentId: "",
         addressId: null,
         totalAmount:0,
         totalQuantity:0,
-        paymentType : 'Cash',
+        paymentType : 'cash',
 
     },
     

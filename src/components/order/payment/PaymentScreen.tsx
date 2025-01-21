@@ -29,7 +29,7 @@ const PaymentScreen = () => {
   
 
  
-   const setCurrentPayment = (id: number , paymentType :PaymentMethod) => {
+   const setCurrentPayment = (id: string , paymentType :PaymentMethod) => {
      setPayment(id,paymentType);
   };
   return (

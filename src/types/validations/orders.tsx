@@ -1,9 +1,9 @@
  import { nullable, z } from 'zod';
   enum PaymentMethod {
-   Visa = "Visa",
-   SuperVisa = "Super Visa",
-   PayPal = "PayPal",
-   Cash = "Cash",
+   Visa = "visa",
+   SuperVisa = "super visa",
+   PayPal = "paypal",
+   Cash = "cash",
 }
  export const ModifierOptionSchema = z.object({
     modifierOptionName: z.string(),
@@ -29,20 +29,15 @@
     options: z.array(OptionSchema).nullable(),
 });
  export enum OrderType {
-    Delivery = 'Delivery',
-    Pickup = 'Pick up',
+    Delivery = 'delivery',
+    Pickup = 'pick up',
   }
 
  export const OrderSchema = z.object({
     products: z.array(ProductSchema),
     orderType: z.enum([OrderType.Delivery, OrderType.Pickup]).optional(),
-<<<<<<< HEAD
     paymentId: z.string().optional(),
     addressId: z.string().nullable(),
-=======
-    paymentId: z.number().nullable(),
-    addressId: z.number().nullable(),
->>>>>>> d98d73459d906ae468d926056fc879b4e5748119
     totalAmount:z.number().optional(),
     totalQuantity:z.number().optional(),
     paymentType: z.enum([PaymentMethod.Visa, PaymentMethod.SuperVisa, PaymentMethod.PayPal, PaymentMethod.Cash]).optional()

@@ -5,7 +5,7 @@ import IncereaseDecrease from './IncereaseDecrease';
 type Props = {
     item: Product;
 };
-const CardProduct: React.FC<Props> = ({ item,  }) => {
+const CardProduct: React.FC<Props> = ({ item }) => {
  
     return (
         <>

@@ -13,9 +13,9 @@ const windowHeight = Dimensions.get("window").height;
 export const ProductDetailsScreen = () => {
   console.log("im height and width in cart ", windowWidth, windowHeight);
   const { id } = useLocalSearchParams();
-  const numericId = Array.isArray(id) ? Number(id[0]) : Number(id);
+  // const numericId = Array.isArray(id) ?(id[0]) :(id);
 
-  const { data, error, isLoading } = useGetModifiersWithProduct(numericId);
+  const { data, error, isLoading } = useGetModifiersWithProduct(id as string);
   if (isLoading) {
     return (
       <View style={[styles.container, styles.horizontal]}>
@@ -30,6 +30,12 @@ export const ProductDetailsScreen = () => {
         <Text>Error loading modifiers: {error.message}</Text>
       </View>
     );
+  
+  }
+  if(data?.product){
+    return ( <View style={styles.container}>
+      <Text>is null</Text>
+    </View>)
   }
   return (
     <>

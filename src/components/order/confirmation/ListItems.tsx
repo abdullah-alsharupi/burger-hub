@@ -8,6 +8,8 @@ const {height}=Dimensions.get("screen");
 const ListItems = () => {
   const { cart } = useCartStore((state) => state);
   const products: Product[] = cart.products;
+  // console.log(cart.products)
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Items</Text>
@@ -15,7 +17,7 @@ const ListItems = () => {
 
       <ScrollView>
         {products &&
-          products.map((item) => (
+          products?.map((item) => (
           <CardProduct item={item} key={item.id}/>
           ))}
       </ScrollView>

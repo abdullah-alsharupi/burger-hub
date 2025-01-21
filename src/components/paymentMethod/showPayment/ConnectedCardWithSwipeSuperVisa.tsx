@@ -7,7 +7,7 @@ import { PaymentMethod } from "@/src/types/schema/enums";
 
 type Prop = {
   paymentMethods: PaymentMethodVisa[] | null;
-  onClick: (id: number, methodType: PaymentMethod) => void;
+  onClick: (id: string, methodType: PaymentMethod) => void;
 };
 
 const ConnectedCardWithSwipeSuperVisa = ({ paymentMethods, onClick }: Prop) => {

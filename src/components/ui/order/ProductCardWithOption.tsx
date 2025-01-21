@@ -23,7 +23,7 @@ const ProductCardWithOption: React.FC<Props> = ({
   return (
     <View style={styles.card}>
       <Image
-       source={item.imageurl}
+       src={`${item.imageurl}`}
         style={styles.image}
       />
       <View style={styles.cardContainer}>

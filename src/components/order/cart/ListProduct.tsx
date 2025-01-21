@@ -26,9 +26,9 @@ const ListProduct: React.FC = () => {
                     <Header />
                     <SwipeListView
                         data={products}
-                        renderItem={({ item }) => <CardProduct item={item} key={item.id} />}
+                        renderItem={({ item }) => <CardProduct item={item}  />}
                     
-                        renderHiddenItem={({ item, index }, rowMap) => <ItemsHidden item={item} rowMap={rowMap} key={index} />}
+                        renderHiddenItem={({ item, index }, rowMap) => <ItemsHidden item={item} rowMap={rowMap} />}
                         rightOpenValue={-105}
                         keyExtractor={item=>item.id}
                         disableRightSwipe

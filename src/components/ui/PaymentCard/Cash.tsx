@@ -24,7 +24,7 @@ function Cash({  onClick,  selectedPaymentType }: Props) {
       <TouchableOpacity
          style={[
           styles.card,
-           selectedPaymentType === 'Cash'? styles.selectedCard : {},
+           selectedPaymentType === 'cash'? styles.selectedCard : {},
         ]}
         onPress={onClick}  
       >
@@ -37,7 +37,7 @@ function Cash({  onClick,  selectedPaymentType }: Props) {
          
         </View>
 
-        { selectedPaymentType === 'Cash' && <View style={styles.radioButton} />}
+        { selectedPaymentType === 'cash' && <View style={styles.radioButton} />}
       </TouchableOpacity>
     </ >
   );

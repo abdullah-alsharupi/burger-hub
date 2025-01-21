@@ -2,7 +2,7 @@ import { supabase } from "@/src/services/supabase/client";
 import { useQuery } from '@tanstack/react-query';
 
   
- const getModifiersWithProduct = async (productId: number) => {
+ const getModifiersWithProduct = async (productId: string) => {
      const { data: product, error: productError } = await supabase
         .from('products')
         .select('*')
@@ -49,12 +49,12 @@ import { useQuery } from '@tanstack/react-query';
 
  
 
-export const useGetModifiersWithProduct = (id?: number) => {
+export const useGetModifiersWithProduct = (id?: string) => {
     return useQuery({
       queryKey: ["Modifiers", id],
       queryFn: async () => {
         if (!id) return null;
-        return await getModifiersWithProduct(id);
+        return await getModifiersWithProduct(id as string);
       },
     });
   };

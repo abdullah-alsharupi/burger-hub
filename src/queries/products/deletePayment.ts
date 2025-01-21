@@ -1,6 +1,6 @@
 import { supabase } from "@/src/services/supabase/client";
 
-export const deleteVisaOrSuperVisaPayment = async (paymentId: number) => {
+export const deleteVisaOrSuperVisaPayment = async (paymentId: string) => {
   try {
     const { data, error } = await supabase
       .from('payment_method')

@@ -8,22 +8,23 @@ export const useGetAllPaymentUser = (id: string) => {
   return useQuery<PaymentMethodsResponse | null, Error>({
     queryKey: ["payments", id],
     queryFn: async () => {
-      const order = await getAllPaymentUser(id);
-      return order;
+      const userPaments = await getAllPaymentUser(id);
+      return userPaments;
     },
   });
 };
-const getAllPaymentUser = async (userId: string): Promise<PaymentMethodsResponse | null> => {
+const getAllPaymentUser = async (userId: string): Promise<PaymentMethodsResponse|null> => {
   try {
     const { data: payments, error } = await supabase
-      .rpc<PaymentMethodsResponse, GetUserPaymentMethodsParams>('get_user_payment_methods', {
-        p_user_id: userId
-      });
+    
+      .from('payment_method')
+      .select("*")
+      .eq("user_id",userId)
     if (error) {
       console.error("Error fetching payments:", error);
       return null; // Return null instead of an empty array
     }
-    return payments; // This should already be of type PaymentMethodsResponse
+    return payments as unknown as PaymentMethodsResponse
   } catch (error: any) {
     console.error("Error in fetching orders:", error);
     return null; // Return null on error

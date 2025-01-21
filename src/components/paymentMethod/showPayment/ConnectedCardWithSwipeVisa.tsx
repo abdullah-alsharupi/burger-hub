@@ -8,7 +8,6 @@ import {
 import {
   PaymentMethodPayPal,
   PaymentMethodsResponse,
-  PaymentMethodVisa,
 } from "@/src/types/validations/Payments";
 import { PaymentType } from "@/src/store/cart/cartSlice";
 import Paypal from "../../ui/PaymentCard/Paypal";
@@ -16,12 +15,14 @@ import SuperVisa from "../../ui/PaymentCard/SuperVisa";
 import Visa from "../../ui/PaymentCard/Visa";
 import Header from "../../order/cart/Header";
 import ItemsHidden from "./ItemDeleteHidden";
+import { PaymentMethod } from "@/src/types/schema/enums";
 
 type Prop = {
-  paymentMethods: PaymentMethodVisa[] | null;
-  onClick: (id: number, methodType: PaymentType) => void;
+  paymentMethods: PaymentMethodsResponse [] |null;
+  onClick: (id: string, methodType: PaymentMethod) => void;
 };
 const ConnectedCardWithSwipeVisa = ({ paymentMethods, onClick }: Prop) => {
+  console.log(" in visa",paymentMethods)
 
   if (paymentMethods?.length == 0 || paymentMethods?.length == undefined)
     return null;

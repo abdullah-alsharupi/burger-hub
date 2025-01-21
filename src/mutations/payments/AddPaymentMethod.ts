@@ -15,7 +15,7 @@ const addPayment = async (paymentData: Insert<"payment_method">) => {
 
 export const AddPaymentMethod = () => {
   return useMutation({
-    mutationFn: addPayment,
+    mutationFn:addPayment,
     onSuccess: () => {
       console.log("تمت إضافة طريقة الدفع بنجاح");
     },

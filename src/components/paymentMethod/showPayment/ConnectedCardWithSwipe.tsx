@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, SafeAreaView, StyleSheet, Dimensions, ScrollView } from "react-native";
 import {
   PaymentMethodsResponse,
-  PaymentMethodVisa,
 } from "@/src/types/validations/Payments";
 import Header from "../../order/cart/Header";
 import ConnectedCardWithSwipeVisa from "./ConnectedCardWithSwipeVisa";
@@ -26,14 +25,13 @@ const ConnectedCardWithSwipe = ({ paymentMethods, refetch }: Prop) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState<{
-    id: number;
+    id: string;
     methodType: PaymentMethod;
   } | null>(null);
-
   const handleCancel = () => {
     setDialogOpen(false);
   };
-
+console.log(paymentMethods)
   const handleDeleteMethod = async () => {
     if (selectedMethod) {
       setLoading(true);
@@ -41,9 +39,9 @@ const ConnectedCardWithSwipe = ({ paymentMethods, refetch }: Prop) => {
         const { id, methodType } = selectedMethod;
         console.log(`Deleting payment method ID: ${id}`);
         if (
-          methodType === "Visa" ||
-          methodType === "Super Visa" ||
-          methodType === "PayPal"
+          methodType === "visa" ||
+          methodType === "super visa" ||
+          methodType === "paypal"
         ) {
           await deleteVisaOrSuperVisaPayment(id);
         }
@@ -65,18 +63,19 @@ const ConnectedCardWithSwipe = ({ paymentMethods, refetch }: Prop) => {
       <SafeAreaView style={styles.safeArea}>
       <ScrollView>
 
-        {paymentMethods?.payment_method_visa_super_visa && (
+        {paymentMethods&& (
           <ConnectedCardWithSwipeVisa
-            onClick={(id: number, methodType: PaymentMethod) => {
+            onClick={(id: string, methodType: PaymentMethod) => {
               setSelectedMethod({ id, methodType });
               setDialogOpen(true);
             }}
-            paymentMethods={paymentMethods.payment_method_visa_super_visa}
+            //@ts-ignore
+            paymentMethods={paymentMethods}
           />
         )}
-        {paymentMethods?.payment_method_visa_super_visa && (
+        {paymentMethods && (
           <ConnectedCardWithSwipeVisa
-            onClick={(id: number, methodType: PaymentMethod) => {
+            onClick={(id: string, methodType: PaymentMethod) => {
               setSelectedMethod({ id, methodType });
               setDialogOpen(true);
             }}

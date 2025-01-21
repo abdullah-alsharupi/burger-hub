@@ -15,14 +15,14 @@ const { width } = Dimensions.get("window");
 type Props = {
   paymentMethode: PaymentMethodVisa;
   onClick: () => void;
-  selectedPaymentID?: number | null;
+  selectedPaymentID?: string;
   selectedPaymentType?:PaymentMethod
 };
 
 function Visa({
   paymentMethode,
   onClick,
-  selectedPaymentID = 0,
+  selectedPaymentID,
   selectedPaymentType,
 }: Props) {
   return (
@@ -40,9 +40,9 @@ function Visa({
       >
         <Image
           source={
-            paymentMethode.method_type=="PayPal"
+            paymentMethode.method_type=="paypal"
               ? require("@/assets/icons/Paypal.png")
-              : paymentMethode.method_type=="Visa"?require("@/assets/icons/visa.png"):require("@/assets/icons/mastercard.png")
+              : paymentMethode.method_type=="visa"?require("@/assets/icons/visa.png"):require("@/assets/icons/mastercard.png")
           }
           style={{ height: paymentMethode.phone_number ? 60 : 40, width: 70 }}
         />

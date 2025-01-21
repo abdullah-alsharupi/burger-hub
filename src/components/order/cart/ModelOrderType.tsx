@@ -30,22 +30,22 @@ const OrderDialog = ({ visible, onClose }: Props) => {
           <Text style={styles.title}>Select order type</Text>
           <TouchableOpacity
             style={styles.radioGroup}
-            onPress={() => setSelectedValue(OrderType.Delivery)}
+            onPress={() => setSelectedValue(OrderType.delivery)}
           >
             <RadioButton
-              value="Delivery"
-              status={selectedValue === "Delivery" ? "checked" : "unchecked"}
+              value="delivery"
+              status={selectedValue === "delivery" ? "checked" : "unchecked"}
               color="black"
             />
             <Text style={styles.radioLabel}>Delivery</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.radioGroup}
-            onPress={() => setSelectedValue(OrderType.Pickup)}
+            onPress={() => setSelectedValue(OrderType.pickup)}
           >
             <RadioButton
-              value="Pick up"
-              status={selectedValue === "Pick up" ? "checked" : "unchecked"}
+              value="pick up"
+              status={selectedValue === "pick up" ? "checked" : "unchecked"}
               color="black"
             />
             <Text style={styles.radioLabel}>Pickup</Text>

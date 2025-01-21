@@ -11,7 +11,7 @@ import Visa from "../../ui/PaymentCard/Visa";
 import { PaymentMethod } from "@/src/types/schema/enums";
 type Prop = {
   paymentMethods: PaymentMethodVisa[] | null;
-  onClick: (id: number, methodType: PaymentMethod) => void;
+  onClick: (id: string, methodType: PaymentMethod) => void;
 };
 const ConnectedCardWithSwipePaypal = ({ paymentMethods, onClick }: Prop) => {
   console.log("im connect this datapayment", paymentMethods);

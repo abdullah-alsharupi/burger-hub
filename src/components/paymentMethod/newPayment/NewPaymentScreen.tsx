@@ -14,6 +14,7 @@ import { PaymentMethod } from "@/src/types/schema/enums";
 const NewPaymentScreen: React.FC = () => {
   const { session } = useSessionStore();
   const userId = session?.id;
+
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -49,8 +50,8 @@ const NewPaymentScreen: React.FC = () => {
     setLoading(true);
     if (
       !paymentMethod ||
-      (paymentMethod !== 'Visa' &&
-        paymentMethod !== 'Super Visa')
+      (paymentMethod !== 'visa' &&
+        paymentMethod !== 'super visa')
     ) {
       console.error("Invalid payment method");
       setLoading(false);
