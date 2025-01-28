@@ -4,7 +4,7 @@ import { router, Stack } from "expo-router";
 import { HeaderBackButton } from "@react-navigation/elements";
 import Header from "@/src/components/ui/Header";
 import AddproductsFavorite from "@/src/components/product/details/AddProductFavorite";
-import { ProductsDetailsScreen } from "@/src/components/product/details/ProductDetailsScreen";
+import { ProductDetailsScreen } from "@/src/components/product/details/ProductDetailsScreen";
 
 const ProductsDetails = () => {
   return (
@@ -15,7 +15,7 @@ const ProductsDetails = () => {
         headerRight={<AddproductsFavorite />}
       />
 
-      <ProductsDetailsScreen />
+      <ProductDetailsScreen />
     </>
   );
 };
