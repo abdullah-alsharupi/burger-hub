@@ -1,14 +1,14 @@
 import { useCartStore } from "@/src/store/cart/cartStore";
- import { Product } from "@/src/types/product/Product";
 import React from "react";
 import { StyleSheet, Text, View, Image, ScrollView, Dimensions } from "react-native";
  import { SafeAreaView } from "react-native-safe-area-context";
-import CardProduct from "./CardProduct";
+import Cardproducts from "./CardProduct";
+import { products } from "@/src/types/product/Product";
 const {height}=Dimensions.get("screen");
 const ListItems = () => {
   const { cart } = useCartStore((state) => state);
-  const products: Product[] = cart.products;
-  // console.log(cart.products)
+  const productss: products[] = cart.productss;
+  // console.log(cart.productss)
 
   return (
     <View style={styles.container}>
@@ -16,9 +16,9 @@ const ListItems = () => {
       <SafeAreaView style={{flex:1}}>
 
       <ScrollView>
-        {products &&
-          products?.map((item) => (
-          <CardProduct item={item} key={item.id}/>
+        {productss &&
+          productss?.map((item) => (
+          <Cardproducts item={item} key={item.id}/>
           ))}
       </ScrollView>
       </SafeAreaView>

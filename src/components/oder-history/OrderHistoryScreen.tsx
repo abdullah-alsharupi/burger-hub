@@ -69,20 +69,20 @@ export default function OrderHistoryScreen() {
             <View style={styles.container}>
               <View>
                 <Text style={styles.orderText}>
-                  $ {order.totalAmount ?? "Not found: totalAmount"}
+                  $ {order.totalamount ?? "No totalAmount"}
                 </Text>
                 <Text style={styles.orderText}>
-                  {order.totalQuantity ?? "Not found: totalQuantity"} items
+                  {order.totalquantity ?? "No totalQuantity"} items
                 </Text>
               </View>
 
               <View>
-                {order.order_type == "Delivery" ? (
+                {order.order_type == "delivery" ? (
                   <View style={styles.orderDetails}>
                     <Text style={styles.orderText}>
                       {" "}
-                      {order.deliveryAt
-                        ? formatDate(new Date(order.deliveryAt))
+                      {order.created_at
+                        ? formatDate(new Date(order.created_at))
                         : "Delivery date not available"}{" "}
                     </Text>
                     <Text style={styles.orderText}>Delivered to</Text>
@@ -94,13 +94,13 @@ export default function OrderHistoryScreen() {
                   <View style={styles.orderDetails}>
                     <Text style={styles.orderText}>
                       {" "}
-                      {order.deliveryAt
+                      {order.created_at
                         ? formatDate(new Date(order.created_at))
-                        : "Delivery date not available"}{" "}
+                        : "no date"}{" "}
                     </Text>
                     <Text style={styles.orderText}>Pick up at</Text>
                     <Text style={styles.address}>
-                      {formatDateTime(new Date(order.created_at))}
+                      {formatDateTime(new Date(order.created_at||""))}
                     </Text>
                   </View>
                 )}

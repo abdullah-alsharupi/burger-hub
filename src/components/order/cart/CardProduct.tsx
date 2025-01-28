@@ -1,11 +1,12 @@
 import React from 'react';
- import ProductCardWithOption from '../../ui/order/ProductCardWithOption';
-import { Product } from '@/src/types/product/Product';
+
 import IncereaseDecrease from './IncereaseDecrease';
+import { products } from '@/src/types/product/Product';
+import ProductCardWithOption from '../../ui/order/ProductCardWithOption';
 type Props = {
-    item: Product;
+    item: products;
 };
-const CardProduct: React.FC<Props> = ({ item }) => {
+const Cardproducts: React.FC<Props> = ({ item }) => {
  
     return (
         <>
@@ -16,5 +17,5 @@ const CardProduct: React.FC<Props> = ({ item }) => {
     );
 };
 
-export default CardProduct;
+export default Cardproducts;
  

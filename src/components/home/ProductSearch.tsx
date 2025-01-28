@@ -7,16 +7,15 @@ import {
   ActivityIndicator,
 } from "react-native";
 import SearchInput from "../ui/SearchInput";
-import { useSearchProducts } from "../../queries/products/getbySearch";
 import Buttonout from "../ui/Buttonout";
 import Homes from "./Home";
 import CardWrapper from "../ui/card/CardWrapper";
 import NotFound from "../notFound/NotFound";
-import { Product } from "@/src/types/product/Product";
+import { useSearchproducts } from "@/src/queries/products/getbySearch";
 
-const ProductSearch: React.FC = () => {
+const productsearch: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const { data: products, isLoading, error } = useSearchProducts(searchTerm);
+  const { data: products, isLoading, error } = useSearchproducts(searchTerm);
   const [g, setG] = useState(false);
 
   const handleSearch = (text: string) => {
@@ -52,7 +51,7 @@ const ProductSearch: React.FC = () => {
 
       {products && products.length > 0 ? (
         <>
-          <Text style={styles.productCount}>
+          <Text style={styles.productsCount}>
             Found {products.length} results
           </Text>
           <ScrollView
@@ -66,7 +65,7 @@ const ProductSearch: React.FC = () => {
                 imageSource={{
                   uri:item.imageurl
                 }}
-                title={item.name || "Product Name"}
+                title={item.name || "products Name"}
                 price={`$${item.price?.toFixed(2)}`}
 
                 id={item?.id}
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: "row",
   },
-  productCount: {
+  productsCount: {
     textAlign: "center",
     marginVertical: 10,
     fontSize: 16,
@@ -122,4 +121,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductSearch;
+export default productsearch;

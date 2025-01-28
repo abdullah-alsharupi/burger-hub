@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import ModifierList from "./ModifierList";
 import ConnectedCustumize from "./ConnectedCustumize";
 import { useCartStore } from "@/src/store/cart/cartStore";
-import { ModifierOption, Option } from "@/src/types/product/Customize";
 import { PresentationCustomizeProps } from "@/src/types/product/props/PresentationCustomizeProps";
+import { ModifierOption, Option } from "@/src/types/product/Customize";
+
 
 const PresentationCustomize = ({ handlePress, isPressed, data }: PresentationCustomizeProps) => {
   const { addOption } = useCartStore(state => state);
@@ -13,7 +14,7 @@ const PresentationCustomize = ({ handlePress, isPressed, data }: PresentationCus
     setSelectedOptions(prev => {
       const existingModifier = prev.find(selected => selected.modifireId === modifierId);
       const updatedOptions = existingModifier 
-        ? existingModifier.modifireOptions.some(opt => opt.modifierOptionId === option.modifierOptionId)
+        ? existingModifier.modifireOptions.some((opt) => opt.modifierOptionId === option.modifierOptionId)
           ? existingModifier.modifireOptions.filter(opt => opt.modifierOptionId !== option.modifierOptionId)
           : [...existingModifier.modifireOptions, option]
         : [option];
@@ -36,10 +37,10 @@ const PresentationCustomize = ({ handlePress, isPressed, data }: PresentationCus
     }));
 
     addOption({
-      id: data.product.id,
-      imageurl: data.product.imageurl,
-      name: data.product.name,
-      price: data.product.price,
+      id: data.products.id,
+      imageurl: data.products.imageurl as any,
+      name: data.products.name,
+      price: data.products.price,
       quantity: 0,
       options,
       note: null
@@ -56,7 +57,7 @@ const PresentationCustomize = ({ handlePress, isPressed, data }: PresentationCus
           modifierName={modifier.modifierName}
           options={modifier.modifireOptions}
           modifierId={modifier.modifireId}
-          product={data.product}
+          products={data.products}
           onClick={handleCheckboxPress}
           selectedOptions={selectedOptions}  
         />

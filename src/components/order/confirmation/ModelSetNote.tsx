@@ -9,14 +9,14 @@ import FormInput from "../../ui/FormInput";
 import { useCartStore } from "@/src/store/cart/cartStore";
 
 type Props = {
-  productId: string;
+  productsId: string;
 };
 
 const NoteSchema = z.object({
   note: z.string().optional(),
 });
 
-const ModelSetNote = ({ productId }: Props) => {
+const ModelSetNote = ({ productsId }: Props) => {
   const [dialogVisible, setDialogVisible] = useState(false);
   const closeDialog = () => {
     setDialogVisible(false);
@@ -31,13 +31,13 @@ const ModelSetNote = ({ productId }: Props) => {
 
   useEffect(() => {
     if (dialogVisible) {
-      const existingNote = getNote(productId) || "";
+      const existingNote = getNote(productsId) || "";
       reset({ note: existingNote });
     }
-  }, [dialogVisible, productId, getNote, reset]);
+  }, [dialogVisible, productsId, getNote, reset]);
 
   const onSubmit = (data: NoteType) => {
-    setNote(productId, data.note);
+    setNote(productsId, data.note);
     console.log("I'm note in onSubmit", data);
     closeDialog();
   };

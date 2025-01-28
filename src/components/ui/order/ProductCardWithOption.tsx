@@ -2,20 +2,20 @@ import React from "react";
 import { Image, Text, TouchableOpacity, View, StyleSheet } from "react-native";
 import { useCartStore } from "@/src/store/cart/cartStore";
 import { Dimensions } from "react-native";
-import { Product } from "@/src/types/product/Product";
 import ListOption from "./ListOption";
 import ListModifier from "./ListModifier";
 import ModelSetNote from "../../order/confirmation/ModelSetNote";
+import { products } from "@/src/types/product/Product";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 type Props = {
-  item: Product;
+  item: products;
   children?: React.ReactNode;
   confirmation?: boolean;
 };
 
-const ProductCardWithOption: React.FC<Props> = ({
+const productsCardWithOption: React.FC<Props> = ({
   item,
   children,
   confirmation,
@@ -23,7 +23,7 @@ const ProductCardWithOption: React.FC<Props> = ({
   return (
     <View style={styles.card}>
       <Image
-       src={`${item.imageurl}`}
+       source={item.imageurl}
         style={styles.image}
       />
       <View style={styles.cardContainer}>
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductCardWithOption;
+export default productsCardWithOption;

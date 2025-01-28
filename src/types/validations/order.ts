@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ProductSchema } from "./product";
+import { productsSchema } from "./product";
 
 export const orderSchema = z.object({
   address_id: z.string(),
@@ -18,7 +18,7 @@ export const orderSchema = z.object({
       "cancelled",
     ])
     .default("pending"),
-    products:z.array(ProductSchema).min(1,"At least one product is required"),
+    productss:z.array(productsSchema).min(1,"At least one products is required"),
     totalAmount: z.number().min(0, "total must be at least 0"),
     totalQuantity:z.number().optional().nullable(),
   user_id: z.string(),

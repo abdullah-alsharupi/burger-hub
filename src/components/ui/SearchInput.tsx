@@ -9,17 +9,17 @@ const SearchInput: React.FC<{ color?: string; backgroundColor?: string }> = ({
   backgroundColor = "white",
 }) => {
   const pathname = usePathname();
-  const { searchTerm, setSearchTerm, clearSearchTerm, setProductsOfSearch } =
+  const { searchTerm, setSearchTerm, clearSearchTerm, setproductsOfSearch } =
     usesearchStore();
   const [searchAuto, setSearchAuto] = useState(true);
-  console.log("im her in search", pathname.startsWith("/product/search"));
+  console.log("im her in search", pathname.startsWith("/products/search"));
 
   const handleSearchPress = () => {
-    if (pathname.startsWith("/product/search")) {
-      console.log("im her in search", pathname.startsWith("/product/search"));
+    if (pathname.startsWith("/products/search")) {
+      console.log("im her in search", pathname.startsWith("/products/search"));
     } else {
       router.push(`/product/search`);
-      setProductsOfSearch([]);
+      setproductsOfSearch([]);
     }
   };
   useEffect(() => {
@@ -43,7 +43,7 @@ const SearchInput: React.FC<{ color?: string; backgroundColor?: string }> = ({
         onChangeText={setSearchTerm}
         border
         onPress={handleSearchPress}
-        autoFocus={pathname.startsWith("/product/search")}
+        autoFocus={pathname.startsWith("/products/search")}
       />
     </View>
   );

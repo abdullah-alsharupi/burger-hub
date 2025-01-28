@@ -9,20 +9,20 @@ import {
 import React from "react";
 import NotFound from "@/src/components/notFound/NotFound";
 import CardWrapper from "../ui/card/CardWrapper";
-import { useGetFavoriteProductsByUserId } from "@/src/queries/products/getFavorite";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { useFocusEffect } from "expo-router";
+import { useGetFavoriteproductsByUserId } from "@/src/queries/products/getFavorite";
 
 const { width } = Dimensions.get("screen");
 const Favorites = () => {
   const { session } = useSessionStore();
   const id = session?.id;
   const {
-    data: favoriteProducts,
+    data: favoriteproducts,
     isLoading,
     error,
     refetch,
-  } = useGetFavoriteProductsByUserId(id as string);
+  } = useGetFavoriteproductsByUserId(id as string);
   console.log(session?.id)
 
   useFocusEffect(
@@ -45,24 +45,24 @@ const Favorites = () => {
 
   return (
     <View style={styles.content}>
-      {favoriteProducts && favoriteProducts.length > 0 ? (
+      {favoriteproducts && favoriteproducts.length > 0 ? (
         <ScrollView>
           <View style={styles.cardContainer}>
-            {favoriteProducts.map((product) => (
+            {favoriteproducts.map((products) => (
               <CardWrapper
-                key={product.id}
+                key={products.id}
                 imageSource={{
-                  uri: product.imageurl || "http://example.com/default-image.jpg",
+                  uri: products.imageurl || "http://example.com/default-image.jpg",
                 }}
-                title={product.name || "Product Name"}
-                price={`$${product.price?.toFixed(2)}`}
-                id={product.id}
+                title={products.name || "products Name"}
+                price={`$${products.price?.toFixed(2)}`}
+                id={products.id}
               />
             ))}
           </View>
         </ScrollView>
       ) : (
-        <Text style={styles.noProductsText}>
+        <Text style={styles.noproductsText}>
           <NotFound
             icon="heart-o"
             message1="No favorites"
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "space-between", 
   },
-  noProductsText: {
+  noproductsText: {
     textAlign: "center",
     marginTop: 20,
     fontSize: 18,

@@ -7,18 +7,18 @@ import {Dimensions} from 'react-native';
   const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-type Product = {
+type products = {
     name: string;
     price: number;
     quantity: number;
     id:string
 };
 type Props = {
-    item: Product;
+    item: products;
     rowMap: any;
 };
 const ItemsHidden = ({item,rowMap}:Props) => {
-    const { removeProduct } = useCartStore(state => state);
+    const { removeproducts } = useCartStore(state => state);
 
   return (
     <View style={styles.hiddenContainer}>
@@ -26,7 +26,7 @@ const ItemsHidden = ({item,rowMap}:Props) => {
       <AntDesign name="hearto" size={17} color="#f0f0f0" />
 
     </TouchableOpacity>
-    <TouchableOpacity style={styles.hiddenText} onPress={()=>removeProduct(item.id)}>
+    <TouchableOpacity style={styles.hiddenText} onPress={()=>removeproducts(item.id)}>
       <MaterialIcons name="delete-outline" size={20} color="#f0f0f0" />
 
     </TouchableOpacity>

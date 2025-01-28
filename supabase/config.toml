@@ -114,7 +114,7 @@ secure_password_change = false
 # Controls the minimum amount of time that must pass before sending another signup confirmation or password reset email.
 max_frequency = "1s"
 
-# Use a production-ready SMTP server
+# Use a productsion-ready SMTP server
 # [auth.email.smtp]
 # host = "smtp.sendgrid.net"
 # port = 587

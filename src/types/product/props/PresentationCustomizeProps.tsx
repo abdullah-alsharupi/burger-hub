@@ -4,7 +4,7 @@ export interface PresentationCustomizeProps {
     isPressed: boolean;
     handlePress: () => void;
     data: {
-      product: {
+      products: {
         id: string;
         imageurl: string;
         name: string;

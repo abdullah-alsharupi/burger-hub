@@ -11,7 +11,7 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export const ProductDetailsScreen = () => {
-  console.log("im height and width in cart ", windowWidth, windowHeight);
+
   const { id } = useLocalSearchParams();
   // const numericId = Array.isArray(id) ?(id[0]) :(id);
 
@@ -61,7 +61,7 @@ export const ProductDetailsScreen = () => {
           </View>
         )}
 
-        <Buttons data={data} />
+        <Buttons data={data?.options} />
       </View>
     </>
   );

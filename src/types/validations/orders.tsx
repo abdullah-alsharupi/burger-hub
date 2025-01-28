@@ -19,7 +19,7 @@
     modifireOptions: z.array(ModifierOptionSchema).nullable().optional(),
 });
 
- export const ProductSchema = z.object({
+ export const productsSchema = z.object({
     id: z.string(),
     imageurl: z.string().nullable().optional(),  
     name: z.string(),
@@ -34,7 +34,7 @@
   }
 
  export const OrderSchema = z.object({
-    products: z.array(ProductSchema),
+    productss: z.array(productsSchema),
     orderType: z.enum([OrderType.Delivery, OrderType.Pickup]).optional(),
     paymentId: z.string().optional(),
     addressId: z.string().nullable(),

@@ -4,14 +4,14 @@ import { OrderSchema, OrderSchemaType } from "@/src/types/validations/orders";
 export const createOrder = async (data: OrderSchemaType, id: string) => {
   console.log("Incoming order data:", data);
   
-  // Check if products array is populated
-  if (!data.products || !Array.isArray(data.products) || data.products.length === 0) {
-    throw new Error("Products array is required and must contain at least one product.");
+  // Check if productss array is populated
+  if (!data.productss || !Array.isArray(data.productss) || data.productss.length === 0) {
+    throw new Error("productss array is required and must contain at least one products.");
   }
 
-  data.products.forEach((product, index) => {
-    if (!product.id || !product.name || typeof product.price !== 'number') {
-      throw new Error(`Product at index ${index} is missing required fields.`);
+  data.productss.forEach((products, index) => {
+    if (!products.id || !products.name || typeof products.price !== 'number') {
+      throw new Error(`products at index ${index} is missing required fields.`);
     }
   });
 

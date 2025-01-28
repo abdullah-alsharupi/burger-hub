@@ -25,7 +25,7 @@ export default function OrderDetails() {
     error,
     isLoading,
     refetch,
-  } = useGetOrderById(id as unknown as number);
+  } = useGetOrderById(id as string);
   useFocusEffect(
     React.useCallback(() => {
       refetch();
@@ -108,14 +108,14 @@ export default function OrderDetails() {
                 <Text style={styles.orderText}>
                   {order.totalquantity ?? "Not found: totalQuantity"} items
                 </Text>
-                {order.Products?.length > 0 ? (
-                  order.Products.map((product, index) => (
-                    <Text key={product.id} style={styles.productText}>
-                      {`${index + 1}.${product.name} (${product.quantity})`}
+                {order.productss?.length > 0 ? (
+                  order.productss.map((products, index) => (
+                    <Text key={products.id} style={styles.productsText}>
+                      {`${index + 1}.${products.name} (${products.quantity})`}
                     </Text>
                   ))
                 ) : (
-                  <Text>No products found</Text>
+                  <Text>No productss found</Text>
                 )}
               </View>
             </View>
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginVertical: 5,
   },
-  productText: {
+  productsText: {
     fontSize: 14,
     color: "#555",
   },

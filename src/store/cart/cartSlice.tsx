@@ -1,7 +1,7 @@
+
 import { Option } from "@/src/types/product/Customize";
-import { Product } from "@/src/types/product/Product";
+import { products } from "@/src/types/product/Product";
 import { PaymentMethod } from "@/src/types/schema/enums";
-import { products } from "@/src/types/schema/product";
 import { StateCreator } from "zustand";
 export enum OrderType {
     delivery = 'delivery',
@@ -13,7 +13,7 @@ export enum OrderType {
     PayPal ='paypal'
   }
 export type CartType = {
-    products: Product[];
+    productss: products[];
     orderType: OrderType.pickup | OrderType.delivery;
     paymentId: string;
     addressId: string |null;
@@ -25,25 +25,25 @@ export type CartType = {
 
 export type CartState = {
     cart: CartType;
-    addProduct: (product: Product) => void;
-    increaseQuantity: (productId: string) => void;
-    decreaseQuantity: (productId: string) => void;
-    removeProduct: (productId: string) => void;
+    addproducts: (products: products) => void;
+    increaseQuantity: (productsId: string) => void;
+    decreaseQuantity: (productsId: string) => void;
+    removeproducts: (productsId: string) => void;
     removeCart: () => void;
-    addOption: (product: Product) => void;
-    deleteOption: (productId: string, modifireId: string, modifireOption: string) => void;
-    getProductOptions: (productId: string) => Option[] | null;
-    getTotalProducts: () => number; // New method to get total unique products
+    addOption: (products: products) => void;
+    deleteOption: (productsId: string, modifireId: string, modifireOption: string) => void;
+    getproductsOptions: (productsId: string) => Option[] | null;
+    getTotalproductss: () => number; // New method to get total unique productss
     changeOrderType: (orderType: OrderType.delivery | OrderType.pickup) => void; // New method
     totalPrice: () => number;
     setAddressId: (IdAddress: string) =>void;
     setPayment:(IdPayment: string , paymentType:PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa) =>void;
-    setNote:(productId:string , note:string) =>void;
-    getNote:(productId:string)=>string | null;
+    setNote:(productsId:string , note:string) =>void;
+    getNote:(productsId:string)=>string | null;
 
 };export const createCartSlice: StateCreator<CartState> = (set, get) => ({
     cart: {
-      products:[],
+      productss:[],
         orderType: OrderType.delivery, 
         paymentId: "",
         addressId: null,
@@ -53,31 +53,31 @@ export type CartState = {
 
     },
     
-    addProduct: (product) => {
+    addproducts: (products) => {
         const { cart } = get();
-        const alreadyInCart = cart.products.find((p) => p.id === product.id);
-        if (alreadyInCart) return get().increaseQuantity(product.id);
-         set({ cart: { ...cart, products: [{ ...product, quantity: 1 }, ...cart.products] } });
+        const alreadyInCart = cart.productss.find((p) => p.id === products.id);
+        if (alreadyInCart) return get().increaseQuantity(products.id);
+         set({ cart: { ...cart, productss: [{ ...products, quantity: 1 }, ...cart.productss] } });
          get().totalPrice();
     },
     
-    increaseQuantity: (productId) => {
+    increaseQuantity: (productsId) => {
         const { cart } = get();
-        const updatedProducts = cart.products.map((p) =>
-            p.id === productId
+        const updatedproductss = cart.productss.map((p) =>
+            p.id === productsId
                 ? { ...p, quantity: (p.quantity || 0) + 1 }
                 : p
         );
-        set({ cart: { ...cart, products: updatedProducts } });
+        set({ cart: { ...cart, productss: updatedproductss } });
         get().totalPrice();
 
  
     },
     
-    decreaseQuantity: (productId) => {
+    decreaseQuantity: (productsId) => {
         const { cart } = get();
-        const updatedProducts = cart.products.reduce((acc, p) => {
-            if (p.id === productId) {
+        const updatedproductss = cart.productss.reduce((acc, p) => {
+            if (p.id === productsId) {
                 if (p.quantity > 1) {
                     acc.push({ ...p, quantity: p.quantity - 1 });
                 }
@@ -85,33 +85,33 @@ export type CartState = {
                 acc.push(p);
             }
             return acc;
-        }, [] as Product[]);
+        }, [] as products[]);
 
-        set({ cart: { ...cart, products: updatedProducts } });
+        set({ cart: { ...cart, productss: updatedproductss } });
         get().totalPrice();
 
     },
     
-    removeProduct: (productId) => {
+    removeproducts: (productsId) => {
         const { cart } = get();
-        const updatedProducts = cart.products.filter((p) => p.id !== productId);
-        set({ cart: { ...cart, products: updatedProducts } });
+        const updatedproductss = cart.productss.filter((p) => p.id !== productsId);
+        set({ cart: { ...cart, productss: updatedproductss } });
         get().totalPrice();
-        get().getTotalProducts();
+        get().getTotalproductss();
 
 
     },
     
-    removeCart: () => set({ cart: { products: [], orderType: OrderType.delivery, paymentId: "", addressId: "" ,totalAmount:0,totalQuantity:0,paymentType:PaymentType.PayPal} }),
+    removeCart: () => set({ cart: { productss: [], orderType: OrderType.delivery, paymentId: "", addressId: "" ,totalAmount:0,totalQuantity:0,paymentType:PaymentType.PayPal} }),
 
-    addOption: (product: Product) => {
+    addOption: (products: products) => {
         const { cart } = get();
-        const existingProductIndex = cart.products.findIndex(p => p.id === product.id);
+        const existingproductsIndex = cart.productss.findIndex(p => p.id === products.id);
         
-        if (existingProductIndex !== -1) {
-            const existingProduct = cart.products[existingProductIndex];
-            const updatedOptions = existingProduct.options.map(option => {
-                const newOptions = product.options.filter(o => o.modifireId === option.modifireId);
+        if (existingproductsIndex !== -1) {
+            const existingproducts = cart.productss[existingproductsIndex];
+            const updatedOptions = existingproducts.options.map(option => {
+                const newOptions = products.options.filter(o => o.modifireId === option.modifireId);
                 return {
                     ...option,
                     modifireOptions: [
@@ -129,32 +129,32 @@ export type CartState = {
                 };
             });
 
-            const updatedProduct: Product = {
-                ...existingProduct,
+            const updatedproducts: products = {
+                ...existingproducts,
                 options: updatedOptions,
             };
 
-            const updatedProducts = cart.products.map((p, index) => 
-                index === existingProductIndex ? updatedProduct : p
+            const updatedproductss = cart.productss.map((p, index) => 
+                index === existingproductsIndex ? updatedproducts : p
             );
 
-            set({ cart: { ...cart, products: updatedProducts } });
-            console.log("Updated Cart:", updatedProducts);
+            set({ cart: { ...cart, productss: updatedproductss } });
+            console.log("Updated Cart:", updatedproductss);
         } else {
-            const newProduct: Product = {
-                ...product,
-                options: product.options,
+            const newproducts: products = {
+                ...products,
+                options: products.options,
             };
 
-            set({ cart: { ...cart, products: [...cart.products, newProduct] } });
-            console.log("Updated Cart:", [...cart.products, newProduct]);
+            set({ cart: { ...cart, productss: [...cart.productss, newproducts] } });
+            console.log("Updated Cart:", [...cart.productss, newproducts]);
         }
     },
     
-    deleteOption: (productId, modifireId, modifireOption) => {
+    deleteOption: (productsId, modifireId, modifireOption) => {
         const { cart } = get();
-        const updatedProducts = cart.products.map((p) => {
-            if (p.id === productId) {
+        const updatedproductss = cart.productss.map((p) => {
+            if (p.id === productsId) {
                 const updatedOptions = p.options.map((option) => {
                     if (option.modifireId === modifireId) {
                         return {
@@ -171,22 +171,22 @@ export type CartState = {
             return p;  
         });
     
-        set({ cart: { ...cart, products: updatedProducts } });
+        set({ cart: { ...cart, productss: updatedproductss } });
         get().totalPrice();
 
     },
 
-    getProductOptions: (productId) => {
+    getproductsOptions: (productsId) => {
         const { cart } = get();
-        const product = cart.products.find(p => p.id === productId);
-        console.log("im in getProductOptions", product?.options);
-        return product ? product.options : null; 
+        const products = cart.productss.find(p => p.id === productsId);
+        console.log("im in getproductsOptions", products?.options);
+        return products ? products.options : null; 
     },
 
-    // New method to get total unique products
-    getTotalProducts: () => {
+    // New method to get total unique productss
+    getTotalproductss: () => {
         const { cart } = get();
-        const totalQuantity= cart.products.length; 
+        const totalQuantity= cart.productss.length; 
         set({ cart: { ...cart, totalQuantity } });
 
         return totalQuantity;
@@ -198,11 +198,11 @@ export type CartState = {
     },
     totalPrice: () => {
         const { cart } = get();
-        const totalAmount = cart.products.reduce((total, product) => {
-            const productPrice = product.price || 0; // Ensure price is defined
-            const productQuantity = product.quantity || 1; // Default to 1 if quantity is undefined
+        const totalAmount = cart.productss.reduce((total, products) => {
+            const productsPrice = products.price || 0; // Ensure price is defined
+            const productsQuantity = products.quantity || 1; // Default to 1 if quantity is undefined
     
-             const modifierOptionsTotal = (product.options || []).reduce((sum, option) => {
+             const modifierOptionsTotal = (products.options || []).reduce((sum, option) => {
                 const optionTotal = (option.modifireOptions || []).reduce((optionSum, modifier) => {
                     const modifierOptionPrice = modifier.modifierOptionPrice || 0;  
                     return optionSum + modifierOptionPrice; // Sum the prices of each modifier option
@@ -210,43 +210,43 @@ export type CartState = {
                 return optionTotal ; // Add the option total to the overall sum
             }, 0);
     
-            // Calculate total for this product including modifier options
-            const productTotal = (productPrice + modifierOptionsTotal) * productQuantity;
+            // Calculate total for this products including modifier options
+            const productsTotal = (productsPrice + modifierOptionsTotal) * productsQuantity;
     
-            return total + productTotal; // Add the product total to the overall total
+            return total + productsTotal; // Add the products total to the overall total
         }, 0);
     
         // Update the cart with the new total amount
         set({ cart: { ...cart, totalAmount } });
-        get().getTotalProducts();
+        get().getTotalproductss();
     
         return totalAmount;
     },
     setAddressId: (idNumber: string) => {
         const { cart } = get();
         set({ cart: { ...cart, addressId: idNumber } });
-        get().getTotalProducts();
+        get().getTotalproductss();
 
     },
 
     setPayment: (IdPayment: string ,paymentType : PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa) => {
         const { cart } = get();
         set({ cart: { ...cart, paymentId: IdPayment , paymentType:paymentType } });
-    },setNote: (productId:string,note:string)=>{
+    },setNote: (productsId:string,note:string)=>{
         const { cart } = get();
-        const updatedProducts = cart.products.reduce((acc, p) => {
-            if (p.id === productId) {
+        const updatedproductss = cart.productss.reduce((acc, p) => {
+            if (p.id === productsId) {
                      acc.push({ ...p, note: note });
             } else {
                 acc.push(p);
             }
             return acc;
-        }, [] as Product[]);
+        }, [] as products[]);
 
-        set({ cart: { ...cart, products: updatedProducts } });
-     },getNote: (productId: string) => {
+        set({ cart: { ...cart, productss: updatedproductss } });
+     },getNote: (productsId: string) => {
         const { cart } = get();
-        const product = cart.products.find(p => p.id === productId);
-        return product ? product.note : null; 
+        const products = cart.productss.find(p => p.id === productsId);
+        return products ? products.note : null; 
     }
 });

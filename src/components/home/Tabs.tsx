@@ -8,23 +8,23 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
-import { useGetAllCategories } from "../../queries/products/gitAllCategores";
 import { category } from "../../types/schema/category";
-import { useGetProductsByCategoryId } from "../../queries/products/getProductsByCategoryId";
 import { useTabContext } from "../layout/TabContext";
 import CardWrapper from "../ui/card/CardWrapper";
 import Button from "../ui/Button";
 import { usesearchStore } from "@/src/store/search/searchStore";
 import { router } from "expo-router";
+import { useGetAllCategories } from "@/src/queries/products/gitAllCategores";
+import { useGetproductsByCategoryId } from "@/src/queries/products/getProductsByCategoryId";
 const { width, height } = Dimensions.get("window");
 
 const Tabs = () => {
   const { data: categories, error, isLoading } = useGetAllCategories();
   const { selectedTab, setSelectedTab, setSelectedCategoryName ,selectedCategoryName} =
     useTabContext();
-  const { data: productsByCategory, isLoading: isLoadingProducts } =
-    useGetProductsByCategoryId(selectedTab ||"");
-    const { setSearchTerm, clearSearchTerm,setProductsOfSearch } = usesearchStore();
+  const { data: productsByCategory, isLoading: isLoadingproducts } =
+    useGetproductsByCategoryId(selectedTab ||"");
+    const { setSearchTerm, clearSearchTerm,setproductsOfSearch } = usesearchStore();
 
   useEffect(() => {
     if (categories && categories.length > 0 && selectedTab === null) {
@@ -95,7 +95,7 @@ const Tabs = () => {
         </ScrollView>
       </View>
       <View style={styles.content}>
-        {isLoadingProducts ? (
+        {isLoadingproducts ? (
           <ActivityIndicator size="large" color="#AF042C" />
         ) : productsByCategory && productsByCategory.length > 0 ? (
           <ScrollView
@@ -103,20 +103,20 @@ const Tabs = () => {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.cardContainer}
           >
-            {productsByCategory.map((product) => (
+            {productsByCategory.map((products) => (
               <CardWrapper
-                key={product.id}
+                key={products.id}
                 imageSource={{
-                  uri: product.imageurl || ""
+                  uri: products.imageurl || ""
                 }}
-                title={product.name || "Product Name"}
-                price={`$${product.price?.toFixed(2)}`}
-               id={product.categoriy_id as any}
+                title={products.name || "products Name"}
+                price={`$${products.price?.toFixed(2)}`}
+               id={products.categoriy_id as any}
               />
             ))}
           </ScrollView>
         ) : (
-          <Text style={styles.noProductsText}>We don’t have any {selectedCategoryName} at this moment</Text>
+          <Text style={styles.noproductsText}>We don’t have any {selectedCategoryName} at this moment</Text>
         )}
       </View>
     </View>
@@ -127,7 +127,7 @@ const Tabs = () => {
             title={` View All ${selectedCategoryName} `}
             onClick={()=>{
               console.log("im in view all",productsByCategory )
-               setProductsOfSearch(productsByCategory ?? [])
+               setproductsOfSearch(productsByCategory ?? [])
                router.push('/(drawer)/product/search')
             }}
           
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
   },
-  noProductsText: {
+  noproductsText: {
     fontSize: 18,
     textAlign: "center",
     marginTop: 20,

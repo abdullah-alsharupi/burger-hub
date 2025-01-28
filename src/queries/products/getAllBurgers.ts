@@ -9,7 +9,7 @@ export const getAllCategories = async () => {
   if (error) throw new Error("Failed to fetch categories.");
   return categories;
 };
-export const getProductsForFirstCategory = async () => {
+export const getproductsForFirstCategory = async () => {
   try {
     const categories = await getAllCategories();
 
@@ -32,9 +32,9 @@ export const getProductsForFirstCategory = async () => {
     throw error;
   }
 };
-export const useGetProductsForFirstCategory = () => {
+export const useGetproductsForFirstCategory = () => {
   return useQuery({
     queryKey: ["productsForFirstCategory"],
-    queryFn: getProductsForFirstCategory,
+    queryFn: getproductsForFirstCategory,
   });
 };

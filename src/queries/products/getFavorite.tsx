@@ -2,14 +2,14 @@ import { supabase } from "@/src/services/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { getSession } from "../../store/useSessionStore";
 
-export type Product = {
+export type products = {
   id: string;
   name: string;
   price: number;
   imageurl: string; 
 };
 
-export const getFavoriteProductsByUserId = async (id:string): Promise<Product[]> => {
+export const getFavoriteproductsByUserId = async (id:string): Promise<products[]> => {
   try {
   
    
@@ -24,26 +24,26 @@ export const getFavoriteProductsByUserId = async (id:string): Promise<Product[]>
     if (!favorites || favorites.length === 0) return [];
 
    
-    const productIds = favorites.map(favorite => favorite.productId);
+    const productsIds = favorites.map(favorite => favorite.productId);
     const { data: products, error: productsError } = await supabase
       .from("products") 
       .select("*")
-      .in("id", productIds); 
+      .in("id", productsIds); 
 
     if (productsError) throw new Error("Failed to get products.");
 
-    return (products as Product[]) || []; 
+    return (products as products[]) || []; 
   } catch (error: any) {
     console.error("Error getting favorite products:", error);
     throw error;
   }
 };
 
-export const useGetFavoriteProductsByUserId = (id:string) => {
-  return useQuery<Product[], Error>({
-    queryKey: ["favoriteProducts"],
+export const useGetFavoriteproductsByUserId = (id:string) => {
+  return useQuery<products[], Error>({
+    queryKey: ["favoriteproducts"],
     queryFn: async () => {
-      const products = await getFavoriteProductsByUserId(id);
+      const products = await getFavoriteproductsByUserId(id);
       return products;
     },
   });

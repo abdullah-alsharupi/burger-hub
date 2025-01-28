@@ -3,14 +3,14 @@ import { View, StyleSheet } from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
 import {
   PaymentMethodPayPal,
-  PaymentMethodVisa,
+  PaymentMethodsResponse,
 } from "@/src/types/validations/Payments";
  import Paypal from "../../ui/PaymentCard/Paypal";
 import ItemsHidden from "./ItemDeleteHidden";
 import Visa from "../../ui/PaymentCard/Visa";
 import { PaymentMethod } from "@/src/types/schema/enums";
 type Prop = {
-  paymentMethods: PaymentMethodVisa[] | null;
+  paymentMethods: PaymentMethodsResponse[] | null;
   onClick: (id: string, methodType: PaymentMethod) => void;
 };
 const ConnectedCardWithSwipePaypal = ({ paymentMethods, onClick }: Prop) => {

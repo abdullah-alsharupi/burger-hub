@@ -40,6 +40,7 @@ import { useQuery } from '@tanstack/react-query';
             };
         })
     );
+    console.log(modifiers)
 
      return {
         product: product,
