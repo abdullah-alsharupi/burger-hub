@@ -11,11 +11,11 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export const ProductDetailsScreen = () => {
-  console.log("im height and width in cart ", windowWidth, windowHeight);
   const { id } = useLocalSearchParams();
   // const numericId = Array.isArray(id) ?(id[0]) :(id);
 
-  const { data, error, isLoading } = useGetModifiersWithProduct(id as string);
+   const { data, error, isLoading } = useGetModifiersWithProduct(id as string);
+ console.log("im data in modifier",data)
   if (isLoading) {
     return (
       <View style={[styles.container, styles.horizontal]}>
@@ -32,7 +32,7 @@ export const ProductDetailsScreen = () => {
     );
   
   }
-  if(data?.product){
+  if(!data?.product){
     return ( <View style={styles.container}>
       <Text>is null</Text>
     </View>)

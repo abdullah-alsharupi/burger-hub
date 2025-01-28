@@ -1,7 +1,8 @@
 import { supabase } from "@/src/services/supabase/client";
+import { CartType } from "@/src/store/cart/cartSlice";
 import { OrderSchema, OrderSchemaType } from "@/src/types/validations/orders";
 
-export const createOrder = async (data: OrderSchemaType, id: string) => {
+export const createOrder = async (data: CartType, id: string) => {
   console.log("Incoming order data:", data);
   
   // Check if products array is populated
@@ -25,9 +26,9 @@ export const createOrder = async (data: OrderSchemaType, id: string) => {
     }
 
     const validatedData = parsedData.data;
-    console.log("Validated order data:", validatedData, id);
+    console.log("Validated order data:", JSON.stringify(validatedData,null,), id);
 
-    const { data: order, error } = await supabase.rpc('add_user_order_data', {
+    const { data: order, error } = await supabase.rpc('create_order', {
       order_data: validatedData,
       user_id: id
     });

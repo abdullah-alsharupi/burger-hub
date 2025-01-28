@@ -111,7 +111,7 @@ const Tabs = () => {
                 }}
                 title={product.name || "Product Name"}
                 price={`$${product.price?.toFixed(2)}`}
-               id={product.categoriy_id as any}
+               id={product.id as any}
               />
             ))}
           </ScrollView>

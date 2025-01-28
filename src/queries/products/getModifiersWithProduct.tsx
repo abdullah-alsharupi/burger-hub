@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
   
  const getModifiersWithProduct = async (productId: string) => {
+    console.log(productId)
      const { data: product, error: productError } = await supabase
         .from('products')
         .select('*')
@@ -16,6 +17,7 @@ import { useQuery } from '@tanstack/react-query';
         .select('id, name')  
         .eq('product_id', productId);
 
+
     if (modifiersError) throw modifiersError;
 
      const options = await Promise.all(
@@ -24,6 +26,8 @@ import { useQuery } from '@tanstack/react-query';
                 .from('modifier_option')
                 .select('option_name,price,id')  
                 .eq('modifier_id', modifier.id);
+
+                // if(modifierOptions) console.log("im modifierOptions",modifierOptions)
 
             if (optionsError) throw optionsError;
 
@@ -40,7 +44,7 @@ import { useQuery } from '@tanstack/react-query';
             };
         })
     );
-
+console.log("im options",options)
      return {
         product: product,
         options,
