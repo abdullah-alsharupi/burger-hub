@@ -1,10 +1,7 @@
 import React from "react";
 import { View, SafeAreaView, StyleSheet } from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
-import {
-  deleteVisaOrSuperVisaPayment,
-  deletePayPalPayment,
-} from "../../../queries/products/deletePayment";
+
 import {
   PaymentMethodPayPal,
   PaymentMethodsResponse,

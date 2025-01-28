@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 
-const NotFoundproduct = () => {
+const NotFoundproducts = () => {
   return (
     <View style={styles.head}> 
       <Image style={{height:170,width:170}} source={require('@/assets/icons/empty-cart.png')}/>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
       }
 });
 
-export default NotFoundproduct
+export default NotFoundproducts
 
 
 

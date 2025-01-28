@@ -9,7 +9,7 @@ export type SearchStore = {
   setSearchTerm: (term: string) => void;
   clearSearchTerm: () => void;
   productsOfSearch:Row<'products'>[]
-  setProductsOfSearch:(products : Row<'products'>[])=> void
+  setproductsOfSearch:(products : Row<'products'>[])=> void
 };
 
  export const createSearchStore: StateCreator<SearchStore> = (set) => ({
@@ -17,7 +17,7 @@ export type SearchStore = {
   setSearchTerm: (term) => set({ searchTerm: term }),
   clearSearchTerm: () => set({ searchTerm: "" }),
   productsOfSearch:[],
-  setProductsOfSearch:(products)=> set({productsOfSearch:products}) 
+  setproductsOfSearch:(products)=> set({productsOfSearch:products}) 
 
 
 });

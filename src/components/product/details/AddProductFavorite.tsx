@@ -1,25 +1,26 @@
-import { insertroductFavorite } from '@/src/mutations/product/insertroductFavorite';
 import { useSessionStore } from '@/src/store/useSessionStore';
 import { EvilIcons } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
 import { ActivityIndicator, Alert } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { useGetFavoriteProductsByUserIdWithProductId } from '@/src/queries/products/getProductFavoriteById';
-import { deleteProductFavorite } from '@/src/mutations/product/deleteProductFavorite';
-import { useCustomToast } from '@/src/hooks/useCustomToast';
 
-function AddProductFavorite() {
+import { useCustomToast } from '@/src/hooks/useCustomToast';
+import { useGetFavoriteproductssByUserIdWithproductsId } from '@/src/queries/products/getProductFavoriteById';
+import { insertroductFavorite } from '@/src/mutations/product/insertroductFavorite';
+import { deleteproductsFavorite } from '@/src/mutations/product/deleteProductFavorite';
+
+function AddproductsFavorite() {
     const { id } = useLocalSearchParams();
     const { session } = useSessionStore();
     const showToast = useCustomToast();
 
     const { data: favorite, refetch, isFetched, isFetching, isFetchedAfterMount } = 
-        useGetFavoriteProductsByUserIdWithProductId(id as string, session?.id || '');
+        useGetFavoriteproductssByUserIdWithproductsId(id as string, session?.id || '');
 
     const insertToFavorite = async () => {
         try {
-            await insertroductFavorite(Number(id), session?.id || '');
+            await insertroductFavorite(id as string, session?.id || '');
             await refetch();
             showToast("Added successfully!", { type: "success" });
 
@@ -32,7 +33,7 @@ function AddProductFavorite() {
     const deleteToFavorite = async () => {
         try {
             console.log("in deleteToFavorite");
-            await deleteProductFavorite(Number(id), session?.id || '');
+            await deleteproductsFavorite(id as string, session?.id || '');
             await refetch();
             showToast("Deleted Successfully", { type: "warning" });
 
@@ -63,4 +64,4 @@ function AddProductFavorite() {
     );
 }
 
-export default AddProductFavorite;
+export default AddproductsFavorite;

@@ -7,10 +7,10 @@ import { useQuery } from "@tanstack/react-query";
 export type OrderWithAddress = Row<"orders"> & {
   Addresses: Row<"addresses">;
   User: Row<"users">;
-  Products: Row<"order_items">[];
+  productss: Row<"order_items">[];
 };
 
-export const useGetOrderById = (id: number) => {
+export const useGetOrderById = (id: string) => {
   return useQuery({
     queryKey: ["order", id],
     queryFn: async () => {
@@ -20,7 +20,7 @@ export const useGetOrderById = (id: number) => {
   });
 };
 
-const GetOrderById = async (orderId: number): Promise<OrderWithAddress[]> => {
+const GetOrderById = async (orderId: string): Promise<OrderWithAddress[]> => {
   try {
     const { data: orders, error } = await supabase
       .from("orders")
@@ -29,7 +29,7 @@ const GetOrderById = async (orderId: number): Promise<OrderWithAddress[]> => {
         *,
         addresses:address_id(*),
         users:user_id(*),
-        products:Order_Items(*)
+        productss:order_items(*)
       `
       )
       .eq("id", orderId);

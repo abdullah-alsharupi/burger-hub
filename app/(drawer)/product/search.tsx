@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import SearchProductScreen from '@/src/components/home/search/SearchProductScreen'
+import SearchproductsScreen from '@/src/components/home/search/SearchProductScreen'
 
 const search = () => {
   return (
     <>
-     <SearchProductScreen />
+     <SearchproductsScreen />
     </>
   )
 }

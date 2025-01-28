@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 export type OrderWithAddress = Row<"orders"> & {
   Addresses: Row<"addresses">
   User:Row<"users">;
-  Products: Row<"order_items">[];
+  productss: Row<"order_items">[];
 };
 
 export const useGetAllOrders = (id: string) => {

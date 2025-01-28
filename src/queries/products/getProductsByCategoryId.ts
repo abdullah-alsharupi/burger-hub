@@ -3,7 +3,7 @@ import { Row } from "@/src/services/supabase/table.types";
 import { useQuery } from "@tanstack/react-query";
 
 
-export const getProductsByCategoryId = async (categoryId: string) => {
+export const getproductsByCategoryId = async (categoryId: string) => {
   try {
     if (!categoryId) throw new Error("No category ID provided.");
 
@@ -22,12 +22,12 @@ export const getProductsByCategoryId = async (categoryId: string) => {
 };
 
 
-export const useGetProductsByCategoryId = (categoryId: string) => {
+export const useGetproductsByCategoryId = (categoryId: string) => {
   return useQuery({
     queryKey: ["products", categoryId],
     queryFn: async () => {
       if (!categoryId) return [];
-      const products = await getProductsByCategoryId(categoryId);
+      const products = await getproductsByCategoryId(categoryId);
       console.log(products); 
       return products as Row<'products'>[];
     },

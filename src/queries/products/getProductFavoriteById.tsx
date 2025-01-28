@@ -1,8 +1,8 @@
 import { supabase } from "@/src/services/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 
-export const getFavoriteProductsByUserIdWithProductId = async (
-  productId: string,
+export const getFavoriteproductssByUserIdWithproductsId = async (
+  productsId: string,
   id: string
 ) => {
   try {
@@ -10,7 +10,7 @@ export const getFavoriteProductsByUserIdWithProductId = async (
       .from("favorites")
       .select("*")
       .eq("userId", id)
-      .eq("productId", productId);
+      .eq("productsId", productsId);
     if (favoritesError) throw new Error("Failed to get favorites.");
 
     return favorite;
@@ -20,18 +20,18 @@ export const getFavoriteProductsByUserIdWithProductId = async (
   }
 };
 
-export const useGetFavoriteProductsByUserIdWithProductId = (
-  productId: string,
+export const useGetFavoriteproductssByUserIdWithproductsId = (
+  productsId: string,
   id: string
 ) => {
   return useQuery({
     queryKey: ["sd"],
     queryFn: async () => {
-      const products = await getFavoriteProductsByUserIdWithProductId(
-        productId,
+      const productss = await getFavoriteproductssByUserIdWithproductsId(
+        productsId,
         id
       );
-      return products;
+      return productss;
       
     },
   });

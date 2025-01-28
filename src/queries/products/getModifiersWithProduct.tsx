@@ -44,7 +44,7 @@ import { useQuery } from '@tanstack/react-query';
             };
         })
     );
-console.log("im options",options)
+
      return {
         product: product,
         options,

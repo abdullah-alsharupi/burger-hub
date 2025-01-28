@@ -1,7 +1,7 @@
 import { ImageSourcePropType } from "react-native";
 import { Option } from "./Customize";
 
-export type Product = {
+export type products = {
     id: string;
     imageurl: ImageSourcePropType
     name: string;

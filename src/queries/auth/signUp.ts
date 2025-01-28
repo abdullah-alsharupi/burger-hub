@@ -22,7 +22,7 @@ export default async function SignUpQuery(dataFromUser: SignUpType) {
       throw error;
     }
 
-    const userId = dataFromSignUp.user?.id;
+    const userId = dataFromSignUp.user?.id
 
     if (!dataFromSignUp.user) {
       throw new Error("User data is missing after sign-up.");

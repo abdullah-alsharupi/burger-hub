@@ -4,7 +4,7 @@ export  interface PropsModifierList {
     modifierName: string;
     options: ModifierOption[];
     modifierId: string;
-    product: {
+    products: {
       id: string;
       name: string;
       price: number;

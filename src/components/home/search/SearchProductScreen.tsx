@@ -9,21 +9,20 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, useNavigation } from "expo-router";
-import { useSearchProducts } from "@/src/queries/products/getbySearch";
 import CardWrapper from "../../ui/card/CardWrapper";
 import NotFound from "../../notFound/NotFound";
 import { usesearchStore } from "@/src/store/search/searchStore";
 import Header from "../../ui/Header";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { getProductsByCategoryId } from "@/src/queries/products/getProductsByCategoryId";
+import { useSearchproducts } from "@/src/queries/products/getbySearch";
 
-const SearchProductScreen = () => {
+const Searchproductscreen = () => {
   const {
     searchTerm,
     setSearchTerm,
     clearSearchTerm,
     productsOfSearch,
-    setProductsOfSearch,
+    setproductsOfSearch,
   } = usesearchStore();
   const navigation = useNavigation();
   console.log("im productsOfSearch 111 ", productsOfSearch);
@@ -32,10 +31,10 @@ const SearchProductScreen = () => {
     isLoading,
     error,
     refetch,
-  } = useSearchProducts(searchTerm);
+  } = useSearchproducts(searchTerm);
   useEffect(() => {
     if (products) {
-      setProductsOfSearch(products);
+      setproductsOfSearch(products);
     }
   }, [searchTerm]);
 
@@ -80,7 +79,7 @@ const SearchProductScreen = () => {
                     uri:
                       item.imageurl || "http://example.com/default-image.jpg",
                   }}
-                  title={item.name || "Product Name"}
+                  title={item.name || "products Name"}
                   price={`$${item.price?.toFixed(2)}`}
                   id={item.id}
                 />
@@ -128,4 +127,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchProductScreen;
+export default Searchproductscreen;

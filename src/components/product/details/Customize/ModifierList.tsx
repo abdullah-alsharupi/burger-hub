@@ -1,11 +1,12 @@
-import { ModifierOption, Option } from '@/src/types/product/Customize';
+
+import { ModifierOption } from '@/src/types/product/Customize';
 import { PropsModifierList } from '@/src/types/product/props/PropsModifierList';
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
  
 
-const ModifierList= React.memo(({ selectedOptions, modifierName, options, modifierId, product, onClick }:PropsModifierList) => {
+const ModifierList= React.memo(({ selectedOptions, modifierName, options, modifierId, products, onClick }:PropsModifierList) => {
   const renderOptionText = (option: ModifierOption) => {
     const price = option.modifierOptionPrice ?? 0; 
     return `${option.modifierOptionName} ($${price})`;

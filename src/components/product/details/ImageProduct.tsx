@@ -5,7 +5,7 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 
-const ImageProduct = ({ imageBase }: any) => {
+const Imageproducts = ({ imageBase }: any) => {
   return (
     <View>
       <Image
@@ -20,4 +20,4 @@ const ImageProduct = ({ imageBase }: any) => {
   );
 };
 
-export default ImageProduct;
+export default Imageproducts;

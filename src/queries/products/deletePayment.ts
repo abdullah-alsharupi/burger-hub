@@ -17,7 +17,7 @@ export const deleteVisaOrSuperVisaPayment = async (paymentId: string) => {
     throw error;
   }
 };
-export const deletePayPalPayment = async (paymentId: number) => {
+export const deletePayPalPayment = async (paymentId: string) => {
     try {
       const { data, error } = await supabase
         .from('payment_method')

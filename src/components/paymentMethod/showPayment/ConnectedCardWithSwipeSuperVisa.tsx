@@ -1,12 +1,12 @@
 import React from "react";
 import { SwipeListView } from "react-native-swipe-list-view";
-import { PaymentMethodVisa } from "@/src/types/validations/Payments";
+import { PaymentMethodsResponse } from "@/src/types/validations/Payments";
  import Visa from "../../ui/PaymentCard/Visa";
 import ItemsHidden from "./ItemDeleteHidden";
 import { PaymentMethod } from "@/src/types/schema/enums";
 
 type Prop = {
-  paymentMethods: PaymentMethodVisa[] | null;
+  paymentMethods: PaymentMethodsResponse[] | null;
   onClick: (id: string, methodType: PaymentMethod) => void;
 };
 

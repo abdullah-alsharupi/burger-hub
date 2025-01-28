@@ -6,7 +6,7 @@ type CardProps = {
   height: number;
   width: number;
   children: React.ReactNode;
-  id: number;
+  id: string;
 };
 
 const OrderCard = ({ height, width, children, id }: CardProps) => {

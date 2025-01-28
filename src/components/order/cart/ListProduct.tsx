@@ -1,32 +1,32 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
 import { SwipeListView } from 'react-native-swipe-list-view';
-import CardProduct from './CardProduct'; 
 import ItemsHidden from './ItemsHidden'; 
 import { useCartStore } from '@/src/store/cart/cartStore';
 import Button from '../../ui/Button';
-import { Product } from '@/src/types/product/Product';
 import OrderDialog from './ModelOrderType';
 import Header from './Header';
-import NotFoundproduct from './NotFoundproduct';
+import { products } from '@/src/types/product/Product';
+import Cardproducts from './CardProduct';
+import NotFoundproducts from './NotFoundproduct';
 
 const {height}=Dimensions.get("screen");
 
-const ListProduct: React.FC = () => {
+const Listproducts: React.FC = () => {
     const [dialogVisible, setDialogVisible] = useState(false);
     const closeDialog = () => { setDialogVisible(!dialogVisible) };
     const { cart } = useCartStore(state => state);
-    const products: Product[] = cart.products;
+    const productss: products[] = cart.productss;
     console.log("I'm cart ", cart);
 
     return (
         <>
-            {cart.products.length !== 0 ? (
+            {cart.productss.length !== 0 ? (
                 <SafeAreaView style={styles.safeArea}>
                     <Header />
                     <SwipeListView
-                        data={products}
-                        renderItem={({ item }) => <CardProduct item={item}  />}
+                        data={productss}
+                        renderItem={({ item }) => <Cardproducts item={item}  />}
                     
                         renderHiddenItem={({ item, index }, rowMap) => <ItemsHidden item={item} rowMap={rowMap} />}
                         rightOpenValue={-105}
@@ -38,7 +38,7 @@ const ListProduct: React.FC = () => {
                         <Button title='Complete order' size='large' color='red' onClick={closeDialog} />
                     </View>
                 </SafeAreaView>
-            ):<NotFoundproduct/>
+            ):<NotFoundproducts/>
 
             
             }
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
      },
 });
 
-export default ListProduct;
+export default Listproducts;

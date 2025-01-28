@@ -6,13 +6,11 @@ import {
 import Header from "../../order/cart/Header";
 import ConnectedCardWithSwipeVisa from "./ConnectedCardWithSwipeVisa";
 import ConnectedCardWithSwipePaypal from "./ConnectedCardWithSwipePaypal";
-import {
-  deletePayPalPayment,
-  deleteVisaOrSuperVisaPayment,
-} from "@/src/queries/products/deletePayment";
+
  import { ActivityIndicator } from "react-native-paper";
 import ShowDialog from "../../ui/showDialog";
 import { PaymentMethod } from "@/src/types/schema/enums";
+import { deleteVisaOrSuperVisaPayment } from "@/src/queries/products/deletePayment";
 
 const { height, width } = Dimensions.get("screen");
 

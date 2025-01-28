@@ -14,25 +14,25 @@ const windowHeight = Dimensions.get('window').height;
 const Buttons = ({data}:props) => {
   const showToast = useCustomToast();
 
-  const {addProduct,cart,getTotalProducts} = useCartStore(state => state);
+  const {addproducts,cart,getTotalproductss} = useCartStore(state => state);
   const [isPressed, setIsPressed] = useState(false);
   const handlePress =async () => {
     setIsPressed(!isPressed);
 // router.navigate('/(screen)/cart')
   };
-  const handleAddProduct =async () => {
+  const handleAddproducts =async () => {
     console.log("im button and cart store before",cart)
-    addProduct({
-      id: data?.product?.id,
-      imageurl: data?.product?.imageurl,
-      name: data?.product?.name,
-      price: data?.product?.price,
+    addproducts({
+      id: data?.products?.id,
+      imageurl: data?.products?.imageurl,
+      name: data?.products?.name,
+      price: data?.products?.price,
       quantity: 1,
       options: [],
       note:null
     });
-    getTotalProducts();
-    showToast("Product has been added successfully!", { type: "success" });
+    getTotalproductss();
+    showToast("products has been added successfully!", { type: "success" });
     router.back();
   };
    return (
@@ -41,7 +41,7 @@ const Buttons = ({data}:props) => {
     <Button size='large' color='white' title='Costomize' onClick={handlePress}/>
   </View>
   <View style={styles.scop}>
-    <Button size='large' color='red' title='Add to cart' onClick={handleAddProduct}/>
+    <Button size='large' color='red' title='Add to cart' onClick={handleAddproducts}/>
   </View>
   <PresentationCustomize data={data}  isPressed={isPressed} handlePress={handlePress} />
   </View>  )
