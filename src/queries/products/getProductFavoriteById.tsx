@@ -10,7 +10,8 @@ export const getFavoriteproductssByUserIdWithproductsId = async (
       .from("favorites")
       .select("*")
       .eq("userId", id)
-      .eq("productsId", productsId);
+      .eq("productId", productsId);
+      console.log("im error in favorites",favoritesError)
     if (favoritesError) throw new Error("Failed to get favorites.");
 
     return favorite;

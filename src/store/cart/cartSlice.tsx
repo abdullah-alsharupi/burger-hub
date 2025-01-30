@@ -10,12 +10,13 @@ export enum OrderType {
   export enum PaymentType {
     Visa = 'visa',
     SuperVisa = 'super visa',
-    PayPal ='paypal'
+    PayPal ='paypal',
+    Cash = 'cash'
   }
 export type CartType = {
     productss: products[];
     orderType: OrderType.pickup | OrderType.delivery;
-    paymentId: string;
+    paymentId: string | null;
     addressId: string |null;
     totalQuantity:number;
     totalAmount:number
@@ -37,7 +38,7 @@ export type CartState = {
     changeOrderType: (orderType: OrderType.delivery | OrderType.pickup) => void; // New method
     totalPrice: () => number;
     setAddressId: (IdAddress: string) =>void;
-    setPayment:(IdPayment: string , paymentType:PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa) =>void;
+    setPayment:(IdPayment: string , paymentType:PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa | PaymentType.Cash) =>void;
     setNote:(productsId:string , note:string) =>void;
     getNote:(productsId:string)=>string | null;
 
@@ -45,7 +46,7 @@ export type CartState = {
     cart: {
       productss:[],
         orderType: OrderType.delivery, 
-        paymentId: "",
+        paymentId: null,
         addressId: null,
         totalAmount:0,
         totalQuantity:0,
@@ -54,6 +55,7 @@ export type CartState = {
     },
     
     addproducts: (products) => {
+        console.log("im add product in cart store",products)
         const { cart } = get();
         const alreadyInCart = cart.productss.find((p) => p.id === products.id);
         if (alreadyInCart) return get().increaseQuantity(products.id);
@@ -102,7 +104,7 @@ export type CartState = {
 
     },
     
-    removeCart: () => set({ cart: { productss: [], orderType: OrderType.delivery, paymentId: "", addressId: "" ,totalAmount:0,totalQuantity:0,paymentType:PaymentType.PayPal} }),
+    removeCart: () => set({ cart: { productss: [], orderType: OrderType.delivery, paymentId: null, addressId: "" ,totalAmount:0,totalQuantity:0,paymentType:PaymentType.Cash} }),
 
     addOption: (products: products) => {
         const { cart } = get();
@@ -229,9 +231,9 @@ export type CartState = {
 
     },
 
-    setPayment: (IdPayment: string ,paymentType : PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa) => {
+    setPayment: (IdPayment: string ,paymentType : PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa | PaymentType.Cash) => {
         const { cart } = get();
-        set({ cart: { ...cart, paymentId: IdPayment , paymentType:paymentType } });
+        set({ cart: { ...cart, paymentId: IdPayment || null, paymentType:paymentType } });
     },setNote: (productsId:string,note:string)=>{
         const { cart } = get();
         const updatedproductss = cart.productss.reduce((acc, p) => {

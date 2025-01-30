@@ -33,7 +33,7 @@ const CardContent = ({ id, imageSource, title, price }: CardContentProps) => {
         title="Customize" 
         size="small" 
         color="white" 
-        onClick={() => router.navigate(`/(drawer)/products/${id}`)} 
+        onClick={() => router.navigate(`/(drawer)/product/${id}`)} 
       /> 
     </View>
   );

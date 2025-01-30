@@ -103,15 +103,15 @@ const Tabs = () => {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.cardContainer}
           >
-            {productsByCategory.map((products) => (
+            {productsByCategory.map((product) => (
               <CardWrapper
-                key={products.id}
+                key={product.id}
                 imageSource={{
-                  uri: products.imageurl || ""
+                  uri: product.imageurl || ""
                 }}
                 title={product.name || "Product Name"}
                 price={`$${product.price?.toFixed(2)}`}
-               id={product.categoriy_id as any}
+               id={product.id}
               />
             ))}
           </ScrollView>

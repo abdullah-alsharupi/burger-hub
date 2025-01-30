@@ -36,7 +36,7 @@
  export const OrderSchema = z.object({
     productss: z.array(productsSchema),
     orderType: z.enum([OrderType.Delivery, OrderType.Pickup]).optional(),
-    paymentId: z.string().optional(),
+    paymentId: z.string().nullable(),
     addressId: z.string().nullable(),
     totalAmount:z.number().optional(),
     totalQuantity:z.number().optional(),

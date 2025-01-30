@@ -14,7 +14,7 @@ export const ProductDetailsScreen = () => {
   console.log("im height and width in cart ", windowWidth, windowHeight);
   const { id } = useLocalSearchParams();
   // const numericId = Array.isArray(id) ?(id[0]) :(id);
-
+console.log("im id ",id)
    const { data, error, isLoading } = useGetModifiersWithProduct(id as string);
  console.log("im data in modifier",data)
   if (isLoading) {
@@ -38,6 +38,7 @@ export const ProductDetailsScreen = () => {
       <Text>is null</Text>
     </View>)
   }
+  console.log("im product details of data",data)
   return (
     <>
       <View style={styles.container}>
@@ -62,7 +63,7 @@ export const ProductDetailsScreen = () => {
           </View>
         )}
 
-        <Buttons data={data?.options} />
+        <Buttons data={data} />
       </View>
     </>
   );

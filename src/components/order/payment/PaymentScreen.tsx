@@ -29,9 +29,7 @@ const PaymentScreen = () => {
   
 
  
-   const setCurrentPayment = (id: string , paymentType :PaymentMethod) => {
-     setPayment(id,paymentType);
-  };
+    
   return (
     <View style={styles.container}>
       

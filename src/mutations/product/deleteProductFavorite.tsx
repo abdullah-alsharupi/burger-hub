@@ -1,12 +1,12 @@
 import { supabase } from "@/src/services/supabase/client";
 
-export const deleteproductsFavorite = async (productsId: string, userId: string) => {
+export const deleteProductFavorite = async (productId: string, userId: string) => {
     try {
         const { data, error } = await supabase
             .from('favorites')
             .delete()
             .eq("userId", userId)
-            .eq("productsId", productsId)
+            .eq("productId", productId)
  
         console.log("Deleted favorite data:", data);
 
@@ -19,4 +19,4 @@ export const deleteproductsFavorite = async (productsId: string, userId: string)
         console.error("Error deleting favorite:", error.message || error);
         throw error; 
     }
-}
+} 

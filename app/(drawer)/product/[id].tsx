@@ -7,6 +7,7 @@ import AddproductsFavorite from "@/src/components/product/details/AddProductFavo
 import { ProductDetailsScreen } from "@/src/components/product/details/ProductDetailsScreen";
 
 const ProductsDetails = () => {
+  console.log("product details screene")
   return (
     <>
       <Header

@@ -38,7 +38,7 @@ const ListPaymentMethod = ({ dataPayments }: Prop) => {
 
       <Cash 
        selectedPaymentType={cart?.paymentType}
-       onClick={()=>{handlePaymentSelect(cart.paymentId,cart?.paymentType as any) }}
+       onClick={()=>{handlePaymentSelect('0',PaymentType.Cash) }}
        
        />
       {dataPayments?.map((payment) => (
@@ -47,7 +47,7 @@ const ListPaymentMethod = ({ dataPayments }: Prop) => {
           onClick={() => handlePaymentSelect(payment.id, payment.method_type)}
           selectedPaymentType={cart?.paymentType}
           paymentMethode={payment}
-          selectedPaymentID={cart?.paymentId ?? null}
+          selectedPaymentID={cart?.paymentId ?? ""}
         />
       ))}
       {dataPayments?.map(renderPaymentMethod as any)}

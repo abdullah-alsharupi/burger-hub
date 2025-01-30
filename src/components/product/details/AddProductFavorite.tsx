@@ -1,67 +1,76 @@
-import { useSessionStore } from '@/src/store/useSessionStore';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator } from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
-import { useLocalSearchParams } from 'expo-router';
-import React, { useEffect } from 'react';
-import { ActivityIndicator, Alert } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useLocalSearchParams } from 'expo-router';
 
+import { useSessionStore } from '@/src/store/useSessionStore';
 import { useCustomToast } from '@/src/hooks/useCustomToast';
 import { useGetFavoriteproductssByUserIdWithproductsId } from '@/src/queries/products/getProductFavoriteById';
-import { insertroductFavorite } from '@/src/mutations/product/insertroductFavorite';
-import { deleteproductsFavorite } from '@/src/mutations/product/deleteProductFavorite';
-
-function AddproductsFavorite() {
+import { insertProductFavorite } from '@/src/mutations/product/insertProductFavorite';
+import { deleteProductFavorite } from '@/src/mutations/product/deleteProductFavorite';
+ 
+function AddProductsFavorite() {
     const { id } = useLocalSearchParams();
     const { session } = useSessionStore();
     const showToast = useCustomToast();
+    const userId = session?.id || '';
 
-    const { data: favorite, refetch, isFetched, isFetching, isFetchedAfterMount } = 
-        useGetFavoriteproductssByUserIdWithproductsId(id as string, session?.id || '');
+    console.log("Favorite product:", id, userId);
 
-    const insertToFavorite = async () => {
-        try {
-            await insertroductFavorite(id as string, session?.id || '');
-            await refetch();
-            showToast("Added successfully!", { type: "success" });
+    // Fetch favorite products
+    const { data: favorite, refetch, isFetching, isFetchedAfterMount } =
+        useGetFavoriteproductssByUserIdWithproductsId(id as string, userId);
 
-        } catch (error) {
-            console.error("Error adding to favorites:", error);
-        }
-    };
- 
-
-    const deleteToFavorite = async () => {
-        try {
-            console.log("in deleteToFavorite");
-            await deleteproductsFavorite(id as string, session?.id || '');
-            await refetch();
-            showToast("Deleted Successfully", { type: "warning" });
-
-        } catch (error) {
-            console.error("Error deleting from favorites:", error);
-        }
-    };
-
- 
+    // Local state for immediate UI update
+    const [isFavorite, setIsFavorite] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        refetch();
+        if (favorite) {
+            setIsFavorite(favorite.length > 0);
+        }
+    }, [favorite]);
+
+    const handleFavoriteToggle = async () => {
+        if (!id || !userId) return;
+
+        try {
+            setLoading(true);
+            if (isFavorite) {
+                await deleteProductFavorite(id as string, userId);
+                 showToast("Removed from favorites", { type: "warning" });
+                setIsFavorite(false); // Update state immediately
+            } else {
+                await insertProductFavorite(id as string, userId);
+                 showToast("Added to favorites!", { type: "success" });
+                setIsFavorite(true); // Update state immediately
+            }
+          await refetch() // Sync with backend
+        } catch (error) {
+            console.error("Error toggling favorite:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        if (id) refetch();
     }, [id]);
 
     return (
         <>
-            {isFetching && ( <ActivityIndicator size="small" color="#AF042C" />)}
+            {(isFetching || loading) && <ActivityIndicator size="small" color="#AF042C" />}
 
-            {   isFetchedAfterMount && (
-                favorite?.length === 0 ? (
-                    <EvilIcons name="heart" size={40} color="black" onPress={insertToFavorite} />
+            {isFetchedAfterMount && (
+                isFavorite ? (
+                    <AntDesign name="heart" size={30} onPress={handleFavoriteToggle} color="#AF042C" />
                 ) : (
-                    <AntDesign name="heart" size={30} onPress={deleteToFavorite} color="#AF042C" />
+                    <EvilIcons name="heart" size={40} color="black" onPress={handleFavoriteToggle} />
                 )
             )}
-            
-         </>
+        </>
     );
 }
 
-export default AddproductsFavorite;
+export default AddProductsFavorite;

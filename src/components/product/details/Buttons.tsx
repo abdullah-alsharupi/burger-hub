@@ -18,21 +18,20 @@ const Buttons = ({data}:props) => {
   const [isPressed, setIsPressed] = useState(false);
   const handlePress =async () => {
     setIsPressed(!isPressed);
-// router.navigate('/(screen)/cart')
-  };
-  const handleAddproducts =async () => {
-    console.log("im button and cart store before",cart)
-    addproducts({
-      id: data?.products?.id,
-      imageurl: data?.products?.imageurl,
-      name: data?.products?.name,
-      price: data?.products?.price,
+   };
+   const handleAddProduct =async () => {
+    console.log("im button and cart store before",data)
+    const x = addproducts({
+      id: data?.product?.id,
+      imageurl: data?.product?.imageUrl,
+      name: data?.product?.name,
+      price: data?.product?.price,
       quantity: 1,
       options: [],
       note:null
     });
-    getTotalproductss();
-    showToast("products has been added successfully!", { type: "success" });
+   await getTotalproductss();
+    showToast("Product has been added successfully!", { type: "success" });
     router.back();
   };
    return (
@@ -41,7 +40,7 @@ const Buttons = ({data}:props) => {
     <Button size='large' color='white' title='Costomize' onClick={handlePress}/>
   </View>
   <View style={styles.scop}>
-    <Button size='large' color='red' title='Add to cart' onClick={handleAddproducts}/>
+    <Button size='large' color='red' title='Add to cart' onClick={handleAddProduct}/>
   </View>
   <PresentationCustomize data={data}  isPressed={isPressed} handlePress={handlePress} />
   </View>  )

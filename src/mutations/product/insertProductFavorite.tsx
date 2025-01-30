@@ -1,6 +1,6 @@
  import { supabase } from "@/src/services/supabase/client";
   
-export const insertroductFavorite = async (productsId: string,userId:string) => {
+export const insertProductFavorite = async (productId: string,userId:string) => {
 
     try {
  
@@ -8,7 +8,7 @@ export const insertroductFavorite = async (productsId: string,userId:string) => 
         const { data:favorite, error } = await supabase
         .from('favorites')
         .insert([
-          { productsId: productsId, userId: userId },
+          { productId: productId, userId: userId },
         ]).select()
          if (error) throw new Error(`Failed to create favorite`);
 
